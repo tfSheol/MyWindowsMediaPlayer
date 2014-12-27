@@ -16,16 +16,28 @@ using Microsoft.Win32;
 namespace MyWindowsMediaPlayer
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// MyWindowsMediaPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        public bool played = false;
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Click_Open(object sender, RoutedEventArgs e)
+        public void InitAll()
+        {
+            Volume.Value = 50;
+            MyMediaPlayer.SpeedRatio = 1;
+            MyMediaPlayer.Volume = 50;
+            played = true;
+            if (played)
+                Play.Content = "Pause";
+        }
+
+        private void Click_Open(object sender, RoutedEventArgs args)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.AddExtension = true;
@@ -33,43 +45,65 @@ namespace MyWindowsMediaPlayer
             ofd.Filter = "Media(*.*)|*.*";
             ofd.ShowDialog();
             MyMediaPlayer.Source = new Uri(ofd.FileName);
-            MyMediaPlayer.SpeedRatio = 1;
-            MyMediaPlayer.Play();
-            //Status.Text = MyMediaPlayer.Clock;
-            //MyMediaPlayer.MediaOpened += new RoutedEventHandler(Click_Open);
-        }
-
-        private void Click_Play(object sender, RoutedEventArgs e)
-        {
-            MyMediaPlayer.SpeedRatio = 1;
+            InitAll();
             MyMediaPlayer.Play();
         }
 
-        private void Click_Pause(object sender, RoutedEventArgs e)
+        private void Click_Play(object sender, RoutedEventArgs args)
         {
-            MyMediaPlayer.Pause();
+            MyMediaPlayer.SpeedRatio = 1;
+            if (!played)
+            {
+                MyMediaPlayer.Play();
+                Play.Content = "Pause";
+            }
+            else
+            {
+                MyMediaPlayer.Pause();
+                Play.Content = "Play";
+            }
+            played = !played;
         }
 
-        private void Click_Stop(object sender, RoutedEventArgs e)
+        private void Opened_Media(object sender, RoutedEventArgs args)
+        {
+            if (MyMediaPlayer.NaturalDuration.HasTimeSpan)
+                TimeMedia.Content = MyMediaPlayer.NaturalDuration.TimeSpan.Hours.ToString() + ":"
+                             + MyMediaPlayer.NaturalDuration.TimeSpan.Minutes.ToString() + ":"
+                             + MyMediaPlayer.NaturalDuration.TimeSpan.Seconds.ToString();
+        }
+
+        private void Update_Time(object sender, RoutedEventArgs args)
         {
             MyMediaPlayer.Stop();
+            MyMediaPlayer.Play();
         }
 
-        private void Slide_Volume(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Click_Stop(object sender, RoutedEventArgs args)
+        {
+            Play.Content = "Play";
+            played = false;
+            MyMediaPlayer.Stop();
+            MyMediaPlayer.Close();
+        }
+
+        private void Slide_Volume(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
             MyMediaPlayer.Volume = (double)Volume.Value;
-            Debug.Text = "Volume : " + (100 * MyMediaPlayer.SpeedRatio).ToString();
+            Debug.Text = "Volume : " + MyMediaPlayer.SpeedRatio.ToString();
         }
 
-        private void Click_SpeedLeft(object sender, RoutedEventArgs e)
+        private void Click_SpeedLeft(object sender, RoutedEventArgs args)
         {
             MyMediaPlayer.SpeedRatio = -MyMediaPlayer.SpeedRatio * 2;
+            played = false;
             Debug.Text = "Speed : x" + MyMediaPlayer.SpeedRatio.ToString();
         }
 
-        private void Click_SpeedRight(object sender, RoutedEventArgs e)
+        private void Click_SpeedRight(object sender, RoutedEventArgs args)
         {
             MyMediaPlayer.SpeedRatio = MyMediaPlayer.SpeedRatio * 2;
+            played = false;
             Debug.Text = "Speed : x" + MyMediaPlayer.SpeedRatio.ToString();
         }
     }

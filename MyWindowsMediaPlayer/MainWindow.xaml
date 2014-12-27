@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MyWindowsMediaPlayer" Height="600" Width="1024">
     <Grid>
-        <Button Content="Play" Height="23" HorizontalAlignment="Left" Margin="102,478,0,0" Name="Play" Click="Click_Play" VerticalAlignment="Top" Width="75" />
-        <Button Content="Pause" Height="23" HorizontalAlignment="Left" Margin="183,478,0,0" Name="Pause" Click="Click_Pause" VerticalAlignment="Top" Width="75" />
-        <Button Content="Stop" Height="23" HorizontalAlignment="Left" Margin="357,478,0,0" Name="Stop" Click="Click_Stop" VerticalAlignment="Top" Width="75" />
+        <MediaElement Height="414" HorizontalAlignment="Left" Margin="12,12,0,0" Name="MyMediaPlayer" VerticalAlignment="Top" Width="978" LoadedBehavior="Manual" UnloadedBehavior="Stop" MediaOpened="Opened_Media" MediaEnded="Update_Time" />
+        <Button Content="Play" Height="23" HorizontalAlignment="Left" Margin="12,458,0,0" Name="Play" Click="Click_Play" VerticalAlignment="Top" Width="75" />
+        <Button Content="Stop" Height="23" HorizontalAlignment="Left" Margin="139,458,0,0" Name="Stop" Click="Click_Stop" VerticalAlignment="Top" Width="75" />
         <Button Content="Open" Height="23" HorizontalAlignment="Left" Margin="885,478,0,0" Name="Open" Click="Click_Open" VerticalAlignment="Top" Width="75" />
-        <MediaElement Height="414" HorizontalAlignment="Left" Margin="12,12,0,0" Name="MyMediaPlayer" VerticalAlignment="Top" Width="978" LoadedBehavior="Manual" UnloadedBehavior="Stop"/>
-        <StatusBar Height="9" HorizontalAlignment="Left" Margin="12,432,0,0" Name="Status" VerticalAlignment="Top" Width="978" />
-        <Slider Height="23" HorizontalAlignment="Left" Margin="834,447,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="156" />
-        <Button Content="-|" Height="23" HorizontalAlignment="Left" Margin="56,478,0,0" Name="SpeedLeft" Click="Click_SpeedLeft" VerticalAlignment="Top" Width="40" />
-        <Button Content="|-" Height="23" HorizontalAlignment="Left" Margin="264,478,0,0" Name="SpeedRight" Click="Click_SpeedRight" VerticalAlignment="Top" Width="40" />
+        <StatusBar Height="9" HorizontalAlignment="Right" Margin="0,432,12,0" Name="Status" VerticalAlignment="Top" Width="938" />
+        <Slider Height="23" HorizontalAlignment="Left" Margin="834,447,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="156" Maximum="100" />
+        <Button Content="-|" Height="23" HorizontalAlignment="Left" Margin="93,458,0,0" Name="SpeedLeft" Click="Click_SpeedLeft" VerticalAlignment="Top" Width="40" />
+        <Button Content="|-" Height="23" HorizontalAlignment="Left" Margin="220,458,0,0" Name="SpeedRight" Click="Click_SpeedRight" VerticalAlignment="Top" Width="40" />
         <TextBox Height="72" HorizontalAlignment="Left" Margin="463,447,0,0" Name="Debug" VerticalAlignment="Top" Width="353" />
+        <Label Content="0:00:00" Height="20" HorizontalAlignment="Left" Margin="11,426,0,0" Name="TimeMedia" VerticalAlignment="Top" Width="35" FontSize="10" Padding="0"/>
     </Grid>
 </Window>
