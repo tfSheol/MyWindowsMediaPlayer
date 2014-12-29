@@ -20,14 +20,15 @@ namespace MyWindowsMediaPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public bool played = false;
+        private bool played = false;
+        private Media media = new Media();
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public void InitAll()
+        public void initAll()
         {
             Volume.Value = 50;
             MyMediaPlayer.SpeedRatio = 1;
@@ -39,15 +40,11 @@ namespace MyWindowsMediaPlayer
 
         private void Click_Open(object sender, RoutedEventArgs args)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.AddExtension = true;
-            ofd.DefaultExt = "*.*";
-            ofd.Filter = "Media(*.*)|*.*";
-            ofd.ShowDialog();
-            if (ofd.FileName != "")
+            media.setPathFile();
+            if (media.isPathFile())
             {
-                MyMediaPlayer.Source = new Uri(ofd.FileName);
-                InitAll();
+                MyMediaPlayer.Source = new Uri(media.getPathFile());
+                initAll();
                 MyMediaPlayer.Play();
             }
         }
