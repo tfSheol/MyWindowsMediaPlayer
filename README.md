@@ -8,6 +8,7 @@
 - Debug dialogue
 - Auto play after open
 - Loop play default
+- Mute Button
 
 ## TODO
 - Playlist
@@ -21,3 +22,5 @@
 - Random play (playlist)
 - Drag and drop files (open modified)
 - General design
+- Backward x(X)
+- FullScreen

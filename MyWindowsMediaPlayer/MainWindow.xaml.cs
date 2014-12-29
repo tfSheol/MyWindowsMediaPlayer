@@ -44,9 +44,12 @@ namespace MyWindowsMediaPlayer
             ofd.DefaultExt = "*.*";
             ofd.Filter = "Media(*.*)|*.*";
             ofd.ShowDialog();
-            MyMediaPlayer.Source = new Uri(ofd.FileName);
-            InitAll();
-            MyMediaPlayer.Play();
+            if (ofd.FileName != "")
+            {
+                MyMediaPlayer.Source = new Uri(ofd.FileName);
+                InitAll();
+                MyMediaPlayer.Play();
+            }
         }
 
         private void Click_Play(object sender, RoutedEventArgs args)
@@ -95,7 +98,8 @@ namespace MyWindowsMediaPlayer
 
         private void Click_SpeedLeft(object sender, RoutedEventArgs args)
         {
-            MyMediaPlayer.SpeedRatio = -MyMediaPlayer.SpeedRatio * 2;
+            //MyMediaPlayer.Position = MyMediaPlayer.Position - TimeSpan.FromSeconds(10);
+            //MyMediaPlayer.SpeedRatio = MyMediaPlayer.SpeedRatio * 2;
             played = false;
             Debug.Text = "Speed : x" + MyMediaPlayer.SpeedRatio.ToString();
         }
@@ -105,6 +109,20 @@ namespace MyWindowsMediaPlayer
             MyMediaPlayer.SpeedRatio = MyMediaPlayer.SpeedRatio * 2;
             played = false;
             Debug.Text = "Speed : x" + MyMediaPlayer.SpeedRatio.ToString();
+        }
+
+        private void Click_Muted(object sender, RoutedEventArgs args)
+        {
+            MyMediaPlayer.IsMuted = !MyMediaPlayer.IsMuted;
+        }
+
+        private void Checked_Debug(object sender, RoutedEventArgs args)
+        {
+            Menu_Debug.IsChecked = !Menu_Debug.IsChecked;
+            if (Debug.Visibility == Visibility.Hidden)
+                Debug.Visibility = Visibility.Visible;
+            else
+                Debug.Visibility = Visibility.Hidden;
         }
     }
 }
