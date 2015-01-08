@@ -20,7 +20,6 @@ namespace MyWindowsMediaPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool played = false;
         private Media media = new Media();
         private StackPanel play = new StackPanel();
         private StackPanel pause = new StackPanel();
@@ -44,7 +43,10 @@ namespace MyWindowsMediaPlayer
         private void Click_Open(object sender, RoutedEventArgs args)
         {
             if (this.media.OpenFile(MyMediaPlayer) == true)
+            {
                 Play.Content = pause;
+                PlayMenuItem.Header = "Pause";
+            }
         }
 
         private void Click_Play_Pause(object sender, RoutedEventArgs args)
@@ -52,9 +54,15 @@ namespace MyWindowsMediaPlayer
             if (this.media.PlayPause(MyMediaPlayer) != false)
             {
                 if (this.media.Get_Played() == true)
+                {
                     Play.Content = this.pause;
+                    PlayMenuItem.Header = "Pause";
+                }
                 else
+                {
                     Play.Content = this.play;
+                    PlayMenuItem.Header = "Play";
+                }
             }
         }
 
@@ -69,11 +77,14 @@ namespace MyWindowsMediaPlayer
         private void Update_Time(object sender, RoutedEventArgs args)
         {
             this.media.Update_Time(MyMediaPlayer);
+            Play.Content = this.pause;
+            PlayMenuItem.Header = "Pause";
         }
 
         private void Click_Stop(object sender, RoutedEventArgs args)
         {
             Play.Content = this.play;
+            PlayMenuItem.Header = "Play";
             this.media.Stop(MyMediaPlayer);
         }
 
@@ -87,7 +98,6 @@ namespace MyWindowsMediaPlayer
         {
 //            MyMediaPlayer.Position = MyMediaPlayer.Position - TimeSpan.FromSeconds(10);
 //            MyMediaPlayer.SpeedRatio = MyMediaPlayer.SpeedRatio * 2;
-            played = false;
             Debug.Text = "Speed : x" + MyMediaPlayer.SpeedRatio.ToString();
         }
 
@@ -168,6 +178,7 @@ namespace MyWindowsMediaPlayer
             {
                 MyMediaPlayer.Width = MyWindow.Width;
                 MyMediaPlayer.Height = MyWindow.Height;
+                MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
             }
             else
             {

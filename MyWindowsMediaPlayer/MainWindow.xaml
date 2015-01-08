@@ -11,7 +11,7 @@
                     <MenuItem Header="full screen" Click="Full_Screen"/>
                 </MenuItem>
                 <MenuItem Header="Playback">
-                    <MenuItem Header="Play | Pause" Click="Click_Play_Pause" />
+                    <MenuItem Header="Play" Click="Click_Play_Pause" Name="PlayMenuItem"/>
                     <MenuItem Header="Stop" Click="Click_Stop" />
                 </MenuItem>
                 <MenuItem Header="Tools">
