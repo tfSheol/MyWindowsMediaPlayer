@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MyWindowsMediaPlayer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MyWindowsMediaPlayer" Height="500" Width="550">
+        Title="MyWindowsMediaPlayer" Height="500" Width="541.954">
     <Grid Background="Black">
         <Menu Height="20" Name="menu1" VerticalAlignment="Top">
             <MenuItem Header="Media">
@@ -14,14 +14,21 @@
             <MenuItem Header="Tools">
                 <MenuItem Name="Menu_Debug" Header="Debug" Click="Checked_Debug" />
             </MenuItem>
+            <MenuItem Header="Playlist">
+                <MenuItem Header="Read" Click="Playlist_Read"/>
+                <MenuItem Header="Add" Click="Playlist_Add"/>
+                <MenuItem Header="Remove" Click="Playlist_Remove"/>
+                <MenuItem Header="Save" Click="Playlist_Save"/>
+                <MenuItem Header="Load" Click="Playlist_Load"/>
+            </MenuItem>
         </Menu>
-        <MediaElement Height="363" HorizontalAlignment="Left" 
+        <MediaElement Height="368" HorizontalAlignment="Left" 
                     Margin="0,20,0,0" Name="MyMediaPlayer" 
                     VerticalAlignment="Top" Width="535" 
                     LoadedBehavior="Manual" UnloadedBehavior="Stop" 
                     MediaOpened="Opened_Media" MediaEnded="Update_Time" 
                     Stretch="Fill" />
-        <Grid Background="White" Margin="0,382,0,0">
+        <Grid Background="White" Margin="0,382,0,0" Name="bunttongrid">
             <Button Content="Play" Height="41" HorizontalAlignment="Left" Margin="5,29,0,0" Name="Play" Click="Click_Play" VerticalAlignment="Top" Width="75" />
             <Button Content="Stop" Height="41" HorizontalAlignment="Left" Margin="132,29,0,0" Name="Stop" Click="Click_Stop" VerticalAlignment="Top" Width="75" />
             <Slider Height="41" HorizontalAlignment="Left" Margin="344,29,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="156" Maximum="100" />
@@ -29,7 +36,12 @@
             <Button Content="|-" Height="41" HorizontalAlignment="Left" Margin="213,29,0,0" Name="SpeedRight" Click="Click_SpeedRight" VerticalAlignment="Top" Width="40" />
             <Button Content="X" Height="41" HorizontalAlignment="Left" Margin="293,29,0,0" Name="Mute" Click="Click_Muted" VerticalAlignment="Top" Width="35" />
             <Label Content="0:00:00" Height="20" HorizontalAlignment="Left" Name="TimeMedia" VerticalAlignment="Top" Width="35" FontSize="10" Padding="0" Margin="12,4,0,0" />
+            <TextBlock Name="currentPlay"  HorizontalAlignment="Left" Height="23" Margin="86,4,0,0" TextWrapping="Wrap" Text="Ready" VerticalAlignment="Top" Width="439"/>
         </Grid>
         <TextBox Height="22" HorizontalAlignment="Left" Margin="175,332,0,0" Name="Debug" Visibility="Hidden" VerticalAlignment="Top" Width="353" />
+        <TreeView Name="tree" HorizontalAlignment="Left" Opacity="0" Height="449" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave">
+            <TreeViewItem Header="Playlist" Name="Playlist" Expanded="ShowPlaylist"/>
+            <TreeViewItem Header="Lib"/>
+        </TreeView>
     </Grid>
 </Window>

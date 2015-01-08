@@ -33,6 +33,11 @@ namespace MyWindowsMediaPlayer
             _pathFile = openOneFile();
         }
 
+        public void setPathFile(String music)
+        {
+            _pathFile = music;
+        }
+
         public string getPathFile()
         {
             return _pathFile;

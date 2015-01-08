@@ -9,3 +9,15 @@ D:\WORK\Git\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsM
 D:\WORK\Git\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer.csproj.GenerateResource.Cache
 D:\WORK\Git\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer.exe
 D:\WORK\Git\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer.pdb
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\MainWindow.baml
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\MainWindow.g.cs
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\App.g.cs
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer_MarkupCompile.cache
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer.g.resources
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer.Properties.Resources.resources
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer.csproj.GenerateResource.Cache
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\bin\Release\MyWindowsMediaPlayer.exe
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\bin\Release\MyWindowsMediaPlayer.pdb
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer.exe
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer.pdb
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Release\MyWindowsMediaPlayer.csprojResolveAssemblyReference.cache

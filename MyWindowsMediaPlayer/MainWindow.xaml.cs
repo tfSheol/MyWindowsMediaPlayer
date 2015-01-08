@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using System.IO;
 
 namespace MyWindowsMediaPlayer
 {
@@ -21,7 +22,10 @@ namespace MyWindowsMediaPlayer
     public partial class MainWindow : Window
     {
         private bool played = false;
+        private bool playlistReading = false;
         private Media media = new Media();
+        private Playlist playlist = new Playlist();
+        private SaveData saver = new SaveData();
 
         public MainWindow()
         {
@@ -40,11 +44,11 @@ namespace MyWindowsMediaPlayer
 
         private void Click_Open(object sender, RoutedEventArgs args)
         {
+            playlistReading = false;
             media.setPathFile();
             if (media.isPathFile())
             {
-                MyMediaPlayer.Source = new Uri(media.getPathFile());
-                initAll();
+                setCurrentMedia(media.getPathFile());
                 MyMediaPlayer.Play();
             }
         }
@@ -65,8 +69,20 @@ namespace MyWindowsMediaPlayer
             played = !played;
         }
 
+        private void Tree_Over(object sender, RoutedEventArgs args)
+        {
+            tree.Opacity = 100;
+            tree.Height = this.Height - 40 - bunttongrid.Height;
+        }
+
+        private void Tree_Leave(object sender, RoutedEventArgs args)
+        {
+            tree.Opacity = 0;
+        }
+
         private void Opened_Media(object sender, RoutedEventArgs args)
         {
+            playlistReading = false;
             if (MyMediaPlayer.NaturalDuration.HasTimeSpan)
                 TimeMedia.Content = MyMediaPlayer.NaturalDuration.TimeSpan.Hours.ToString() + ":"
                              + MyMediaPlayer.NaturalDuration.TimeSpan.Minutes.ToString() + ":"
@@ -76,6 +92,12 @@ namespace MyWindowsMediaPlayer
         private void Update_Time(object sender, RoutedEventArgs args)
         {
             MyMediaPlayer.Stop();
+            if (playlistReading)
+            {
+                if (playlist.countLeft() == 0)
+                    playlist.setCurrentMusic(-1);
+                setCurrentMedia(playlist.getNextMusic());
+            }
             MyMediaPlayer.Play();
         }
 
@@ -120,6 +142,70 @@ namespace MyWindowsMediaPlayer
                 Debug.Visibility = Visibility.Visible;
             else
                 Debug.Visibility = Visibility.Hidden;
+        }
+
+        private void Playlist_Add(object sender, RoutedEventArgs args)
+        {
+            playlistReading = true;
+            playlist.addAMusic();
+            ShowPlaylist(sender, args);
+            if (playlist.countLeft() == 0)
+                playlist.setCurrentMusic(-1);
+            setCurrentMedia(playlist.getNextMusic());
+        }
+
+        private void ShowPlaylist(object sender, RoutedEventArgs args)
+        {
+            Playlist.ItemsSource = playlist.getList().ToArray();
+        }
+
+        private void Playlist_Read(object sender, RoutedEventArgs args)
+        {
+            playlistReading = true;
+            playlist.setCurrentMusic(-1);
+            setCurrentMedia(playlist.getNextMusic());
+            MyMediaPlayer.Play();
+            if (playlist.countLeft() == 0)
+                playlist.setCurrentMusic(-1);
+            setCurrentMedia(playlist.getNextMusic());
+        }
+        
+        private void Playlist_Remove(object sender, RoutedEventArgs args)
+        {
+            if (-1 != playlist.findIndexOf(tree.SelectedItem.ToString()))
+            {
+                playlist.delMusicFromPlaylist(playlist.findIndexOf(tree.SelectedItem.ToString()));
+                ShowPlaylist(sender, args);
+            }
+        }
+
+        private void Playlist_Save(object sender, RoutedEventArgs args)
+        {
+            SaveData.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\my_playlist.xml", this.playlist);
+            if (playlist.countLeft() == 0)
+                playlist.setCurrentMusic(-1);
+            setCurrentMedia(playlist.getNextMusic());
+        }
+
+        private void Playlist_Load(object sender, RoutedEventArgs args)
+        {
+            playlistReading = true;
+            playlist = SaveData.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\my_playlist.xml");
+            ShowPlaylist(sender, args);
+            if (playlist.countLeft() == 0)
+                playlist.setCurrentMusic(-1);
+            setCurrentMedia(playlist.getNextMusic());
+        }
+
+        private void setCurrentMedia(String path)
+        {
+            if (path != null && File.Exists(path))
+            {
+                currentPlay.Text = path;
+                media.setPathFile(path);
+                MyMediaPlayer.Source = new Uri(path);
+                initAll();
+            }
         }
     }
 }
