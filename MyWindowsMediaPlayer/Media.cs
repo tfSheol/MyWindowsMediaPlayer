@@ -2,40 +2,116 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.Win32;
+
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows;
 
 namespace MyWindowsMediaPlayer
 {
     class Media
     {
-        private string _pathFile;
+        private MediaOpenFile openFile = new MediaOpenFile();
+        private bool _played = false;
+        private bool _fullScreen = false;
+        private bool _hide = false;
 
-        private string openOneFile()
+        public void InitAll(MediaElement mediaPlayer)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.AddExtension = true;
-            ofd.DefaultExt = "*.*";
-            ofd.Filter = "Media(*.*)|*.*";
-            ofd.ShowDialog();
-            return ofd.FileName;
+            mediaPlayer.SpeedRatio = 1;
+            _played = true;
         }
 
-        public bool isPathFile()
+        public bool OpenFile(MediaElement mediaPlayer)
         {
-            if (_pathFile != "")
+            this.openFile.setPathFile();
+            if (this.openFile.isPathFile())
+            {
+                mediaPlayer.Source = new Uri(this.openFile.getPathFile());
+                this.InitAll(mediaPlayer);
+                this._played = true;
+                mediaPlayer.Play();
                 return true;
-            else
+            }
+            return false;
+        }
+
+        public bool PlayPause(MediaElement mediaPlayer) 
+        {
+            if (this.openFile.isPathFile() == false)
                 return false;
+            if (mediaPlayer.SpeedRatio != 1)
+            {
+                mediaPlayer.SpeedRatio = 1;
+                return false;
+            }
+            if (this._played)
+                mediaPlayer.Pause();
+            else
+                mediaPlayer.Play();
+            _played = !_played;
+            return true;
         }
 
-        public void setPathFile()
+        public void Update_Time(MediaElement mediaPlayer)
         {
-            _pathFile = openOneFile();
+            mediaPlayer.Stop();
+            mediaPlayer.Play();
         }
 
-        public string getPathFile()
+        public void Stop(MediaElement mediaPlayer)
         {
-            return _pathFile;
+            this._played = false;
+            mediaPlayer.Stop();
+            mediaPlayer.Close();
+        }
+
+        public void Sound(MediaElement mediaPlayer, Slider volume)
+        {
+            mediaPlayer.Volume = (double)volume.Value / 100;
+        }
+
+        public void SpeedRight(MediaElement mediaPlayer)
+        {
+            if (this._played == true)
+            {
+                mediaPlayer.SpeedRatio = mediaPlayer.SpeedRatio*2;
+                _played = false;
+            }
+        }
+
+        public void Mute(MediaElement mediaPlayer)
+        {
+            mediaPlayer.IsMuted = !mediaPlayer.IsMuted;
+        }
+
+        public bool Get_Played()
+        {
+            return this._played;
+        }
+
+        public bool Get_FullScreen()
+        {
+            return this._fullScreen;
+        }
+
+        public bool Get_Hide()
+        {
+            return this._hide;
+        }
+
+        public void FullScreen()
+        {
+            this._fullScreen = !this._fullScreen;
+            this._hide = this._fullScreen;
+        }
+
+        public bool Hide_Click()
+        {
+            this._hide = !this._hide;
+            return _hide;
         }
     }
 }

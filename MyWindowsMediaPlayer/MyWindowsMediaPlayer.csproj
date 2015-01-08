@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MediaOpenFile.cs" />
     <Compile Include="Tools.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +95,24 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressource\avance_rapide.png" />
+    <Resource Include="Ressource\precedent.png" />
+    <Resource Include="Ressource\recul_rapide.png" />
+    <Resource Include="Ressource\suivant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressource\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressource\play.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressource\pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressource\fullScreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
