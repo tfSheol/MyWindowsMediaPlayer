@@ -9,9 +9,9 @@
 - Auto play after open
 - Loop play default
 - Mute Button
+- Playlist
 
 ## TODO
-- Playlist
 - Auto resize
 - Progress Bar
 - Fix volume
