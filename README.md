@@ -9,18 +9,18 @@
 - Auto play after open
 - Loop play default
 - Mute Button
+- Fix volume
+- Auto resize
+- FullScreen
+- FullScreen resize
+- Progress Bar
+- Playlist
 
 ## TODO
-- Playlist
-- Auto resize
-- Progress Bar
-- Fix volume
 - Fix Forward x -1
 - Visualiser for audio
-- FullScreen resize
 - Button loop play
 - Random play (playlist)
 - Drag and drop files (open modified)
-- General design
 - Backward x(X)
-- FullScreen
+- General design

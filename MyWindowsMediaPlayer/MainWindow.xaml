@@ -1,35 +1,81 @@
 ﻿<Window x:Class="MyWindowsMediaPlayer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MyWindowsMediaPlayer" Height="500" Width="550">
+        Title="MyWindowsMediaPlayer" Height="500" Width="550" Name="MyWindow" MouseDoubleClick="MainWindow_OnMouseDoubleClick" ResizeMode="CanResizeWithGrip" 
+        SizeChanged="MainWindow_OnSizeChanged" MinHeight="130" MinWidth="535">
     <Grid Background="Black">
-        <Menu Height="20" Name="menu1" VerticalAlignment="Top">
-            <MenuItem Header="Media">
-                <MenuItem Header="Open file..." Click="Click_Open"/>
-            </MenuItem>
-            <MenuItem Header="Playback">
-                <MenuItem Header="Play" Click="Click_Play" />
-                <MenuItem Header="Stop" Click="Click_Stop" />
-            </MenuItem>
-            <MenuItem Header="Tools">
-                <MenuItem Name="Menu_Debug" Header="Debug" Click="Checked_Debug" />
-            </MenuItem>
-        </Menu>
+        <Grid Name="MenuGrid" Opacity="100" MouseEnter="MenuGrid_OnMouseEnter" MouseLeave="MenuGrid_OnMouseLeave">
+            <Menu Height="20" Name="Menu" VerticalAlignment="Top">
+                <MenuItem Header="Media">
+                    <MenuItem Header="Open file..." Click="Click_Open"/>
+                    <MenuItem Header="full screen" Click="Full_Screen"/>
+                </MenuItem>
+                <MenuItem Header="Playback">
+                    <MenuItem Header="Play" Click="Click_Play_Pause" Name="PlayMenuItem"/>
+                    <MenuItem Header="Stop" Click="Click_Stop" />
+                </MenuItem>
+                <MenuItem Header="Tools">
+                    <MenuItem Name="MenuDebug" Header="Debug" Click="Checked_Debug" />
+                </MenuItem>
+                <MenuItem Header="Playlist">
+                    <MenuItem Header="Read" Click="Playlist_Read"/>
+                    <MenuItem Header="Add" Click="Playlist_Add"/>
+                    <MenuItem Header="Remove" Click="Playlist_Remove"/>
+                    <MenuItem Header="Save" Click="Playlist_Save"/>
+                    <MenuItem Header="Load" Click="Playlist_Load"/>
+                </MenuItem>
+            </Menu>
+        </Grid>
         <MediaElement Height="363" HorizontalAlignment="Left" 
-                    Margin="0,20,0,0" Name="MyMediaPlayer" 
-                    VerticalAlignment="Top" Width="535" 
+                    Margin="0,20,0,0" Name="MyMediaPlayer"
+                    VerticalAlignment="Top" Width="535"
                     LoadedBehavior="Manual" UnloadedBehavior="Stop" 
                     MediaOpened="Opened_Media" MediaEnded="Update_Time" 
                     Stretch="Fill" />
-        <Grid Background="White" Margin="0,382,0,0">
-            <Button Content="Play" Height="41" HorizontalAlignment="Left" Margin="5,29,0,0" Name="Play" Click="Click_Play" VerticalAlignment="Top" Width="75" />
-            <Button Content="Stop" Height="41" HorizontalAlignment="Left" Margin="132,29,0,0" Name="Stop" Click="Click_Stop" VerticalAlignment="Top" Width="75" />
-            <Slider Height="41" HorizontalAlignment="Left" Margin="344,29,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="156" Maximum="100" />
-            <Button Content="-|" Height="41" HorizontalAlignment="Left" Margin="86,29,0,0" Name="SpeedLeft" Click="Click_SpeedLeft" VerticalAlignment="Top" Width="40" />
-            <Button Content="|-" Height="41" HorizontalAlignment="Left" Margin="213,29,0,0" Name="SpeedRight" Click="Click_SpeedRight" VerticalAlignment="Top" Width="40" />
-            <Button Content="X" Height="41" HorizontalAlignment="Left" Margin="293,29,0,0" Name="Mute" Click="Click_Muted" VerticalAlignment="Top" Width="35" />
+        <Grid Name="ButtonGrid" Background="White" Opacity="100" MouseEnter="ButtonGrid_OnMouseEnter" MouseLeave="ButtonGrid_OnMouseLeave"
+              VerticalAlignment="Bottom" Height="75" Width="535">
+            <Slider Height="20" HorizontalAlignment="Left" Margin="265,22,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="150" Maximum="100" />
+            <Slider Height="20" HorizontalAlignment="Left" Margin="67,4,0,0" Name="PositionSlider" ValueChanged="PositionSlider_OnValueChanged" VerticalAlignment="Top" Width="401" />
+            <CheckBox Content="Mute" Height="16" HorizontalAlignment="Left" Margin="425,24,0,0" Name="MuteCheckBox" VerticalAlignment="Top" Click="Mute_CheckBox_Click" />
+            <CheckBox Content="hide" Height="16" HorizontalAlignment="Left" Margin="425,50,0,0" Name="HideAll" VerticalAlignment="Top" Click="HideAll_OnClick" />
             <Label Content="0:00:00" Height="20" HorizontalAlignment="Left" Name="TimeMedia" VerticalAlignment="Top" Width="35" FontSize="10" Padding="0" Margin="12,4,0,0" />
+
+            <Button Height="50" HorizontalAlignment="Left" Margin="4,22,0,0" Name="Play" Click="Click_Play_Pause" VerticalAlignment="Top" Width="50" >
+                <Image Source="Ressource/play.jpg" />
+            </Button>
+
+            <Button Height="34" HorizontalAlignment="Left" Margin="101,28,0,0" Name="Stop" Click="Click_Stop" VerticalAlignment="Top" Width="40" >
+                <Image Source="Ressource/stop.png" />
+            </Button>
+
+            <Button Height="30" HorizontalAlignment="Left" Margin="67,32,0,0" Name="SpeedLeft" Click="Click_SpeedLeft" VerticalAlignment="Top" Width="30" >
+                <Image Source="Ressource/recul_rapide.png" />
+            </Button>
+
+            <Button Height="30" HorizontalAlignment="Left" Margin="145,32,0,0" Name="SpeedRight" Click="Click_SpeedRight" VerticalAlignment="Top" Width="30" >
+                <Image Source="Ressource/avance_rapide.png" />
+            </Button>
+
+            <Button Height="25" HorizontalAlignment="Left" Margin="222,37,0,0" Name="NextButton" VerticalAlignment="Top" Width="25" >
+                <Image Source="Ressource/suivant.png" />
+            </Button>
+
+            <Button Height="25" HorizontalAlignment="Left" Margin="193,37,0,0" Name="PrevButton" VerticalAlignment="Top" Width="25" >
+                <Image Source="Ressource/precedent.png" />
+            </Button>
+
+            <Button Height="23" HorizontalAlignment="Left" Margin="491,43,0,0" Name="FullScreenButton" VerticalAlignment="Top" Width="29" Click="Full_Screen">
+                <Image Source="Ressource/fullScreen.png" />
+            </Button>
+            <Label Height="28" HorizontalAlignment="Left" Margin="265,39,0,0" Name="CurrentPlay" VerticalAlignment="Top" Width="141" />
         </Grid>
+        <TreeView Name="tree" HorizontalAlignment="Left" Opacity="100" Height="363" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave">
+            <TreeViewItem Header="Playlist" IsExpanded="False" Name="Playlist" Expanded="ShowPlaylist"/>
+            <TreeViewItem Header="Lib" IsExpanded="False"  Expanded="ShowLib">
+                <TreeViewItem Header="Musics" HorizontalAlignment="Left" Width="132" Name="Musics"/>
+                <TreeViewItem Header="Photos" HorizontalAlignment="Left" Width="132" Name="Photos"/>
+            </TreeViewItem>
+        </TreeView>
         <TextBox Height="22" HorizontalAlignment="Left" Margin="175,332,0,0" Name="Debug" Visibility="Hidden" VerticalAlignment="Top" Width="353" />
     </Grid>
 </Window>
