@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -75,6 +76,7 @@ namespace MyWindowsMediaPlayer
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Minutes.ToString() + ":"
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Seconds.ToString();
                 PositionSlider.Maximum = MyMediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+                this.resize_Media_Player(this.media.Get_FullScreen());
             }
         }
 
@@ -192,15 +194,18 @@ namespace MyWindowsMediaPlayer
                 {
                     MyMediaPlayer.Height = MyWindow.Height;
                     MyMediaPlayer.Width = (MyMediaPlayer.Height*MyMediaPlayer.NaturalVideoWidth)/
-                                          MyMediaPlayer.NaturalVideoHeight;
+                                            MyMediaPlayer.NaturalVideoHeight;
                 }
                 else
                 {
                     MyMediaPlayer.Width = MyWindow.Width;
                     MyMediaPlayer.Height = (MyMediaPlayer.Width*MyMediaPlayer.NaturalVideoHeight)/
-                                           MyMediaPlayer.NaturalVideoWidth;
+                                            MyMediaPlayer.NaturalVideoWidth;
                 }
-                MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
+                if (MyMediaPlayer.NaturalVideoWidth != 0 || height != 0)
+                    MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
+                else
+                    MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
             }
             else
             {
@@ -217,11 +222,17 @@ namespace MyWindowsMediaPlayer
                 }
                 if (this.media.Get_Hide() == true)
                 {
-                    MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
+                    if (MyMediaPlayer.NaturalVideoWidth != 0 || height != 0)
+                        MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
+                    else
+                        MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
                 }
                 else
                 {
-                    MyMediaPlayer.Margin = new Thickness(0, 20, 0, 0);
+                    if (MyMediaPlayer.NaturalVideoWidth != 0 || height != 0)
+                        MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
+                    else
+                        MyMediaPlayer.Margin = new Thickness(0, 20, 0, 0);
                     MyMediaPlayer.VerticalAlignment = VerticalAlignment.Top;
                 }
                 MyMediaPlayer.Width = MyWindow.Width - 15;
