@@ -20,13 +20,14 @@ namespace MyWindowsMediaPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Media media = new Media();
+        private Media media;
         private StackPanel play = new StackPanel();
         private StackPanel pause = new StackPanel();
 
         public MainWindow()
         {
             InitializeComponent();
+            media = new Media(MyMediaPlayer, PositionSlider);
             Volume.Value = 50;
             Image _play = new Image();
             Image _pause = new Image();
@@ -69,16 +70,20 @@ namespace MyWindowsMediaPlayer
         private void Opened_Media(object sender, RoutedEventArgs args)
         {
             if (MyMediaPlayer.NaturalDuration.HasTimeSpan)
+            {
                 TimeMedia.Content = MyMediaPlayer.NaturalDuration.TimeSpan.Hours.ToString() + ":"
-                             + MyMediaPlayer.NaturalDuration.TimeSpan.Minutes.ToString() + ":"
-                             + MyMediaPlayer.NaturalDuration.TimeSpan.Seconds.ToString();
+                                    + MyMediaPlayer.NaturalDuration.TimeSpan.Minutes.ToString() + ":"
+                                    + MyMediaPlayer.NaturalDuration.TimeSpan.Seconds.ToString();
+                PositionSlider.Maximum = MyMediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+            }
         }
 
         private void Update_Time(object sender, RoutedEventArgs args)
         {
-            this.media.Update_Time(MyMediaPlayer);
+            PositionSlider.Value = 0;
             Play.Content = this.pause;
             PlayMenuItem.Header = "Pause";
+            this.media.Update_Time(MyMediaPlayer);
         }
 
         private void Click_Stop(object sender, RoutedEventArgs args)
@@ -86,6 +91,7 @@ namespace MyWindowsMediaPlayer
             Play.Content = this.play;
             PlayMenuItem.Header = "Play";
             this.media.Stop(MyMediaPlayer);
+            PositionSlider.Value = 0;
         }
 
         private void Slide_Volume(object sender, RoutedPropertyChangedEventArgs<double> args)
@@ -172,17 +178,43 @@ namespace MyWindowsMediaPlayer
             this.Full_Screen(null, null);
         }
 
+        // probleme a fix sur resize non fullscreen
+
         private void resize_Media_Player(bool fullscreen)
         {
+            int height = 0;
+
+            if (MyMediaPlayer.NaturalVideoHeight > MyMediaPlayer.NaturalVideoWidth)
+                height = MyMediaPlayer.NaturalVideoHeight;
             if (fullscreen == true)
             {
-                MyMediaPlayer.Width = MyWindow.Width;
-                MyMediaPlayer.Height = MyWindow.Height;
-                MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
+                if (height != 0)
+                {
+                    MyMediaPlayer.Height = MyWindow.Height;
+                    MyMediaPlayer.Width = (MyMediaPlayer.Height*MyMediaPlayer.NaturalVideoWidth)/
+                                          MyMediaPlayer.NaturalVideoHeight;
+                }
+                else
+                {
+                    MyMediaPlayer.Width = MyWindow.Width;
+                    MyMediaPlayer.Height = (MyMediaPlayer.Width*MyMediaPlayer.NaturalVideoHeight)/
+                                           MyMediaPlayer.NaturalVideoWidth;
+                }
+                MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
             }
             else
             {
                 MyMediaPlayer.Height = MyWindow.Height - 40;
+                if (height != 0)
+                {
+                    MyMediaPlayer.Width = (MyMediaPlayer.Height * MyMediaPlayer.NaturalVideoWidth) /
+                                          MyMediaPlayer.NaturalVideoHeight;
+                }
+                else
+                {
+                    MyMediaPlayer.Height = (MyMediaPlayer.Width*MyMediaPlayer.NaturalVideoHeight)/
+                                           MyMediaPlayer.NaturalVideoWidth;
+                }
                 if (this.media.Get_Hide() == true)
                 {
                     MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
@@ -214,6 +246,11 @@ namespace MyWindowsMediaPlayer
         private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             this.resize_Media_Player(false);
+        }
+
+        private void PositionSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            this.media.Change_Time_Media(MyMediaPlayer, PositionSlider);
         }
     }
 }

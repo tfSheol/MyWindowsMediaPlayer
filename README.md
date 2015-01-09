@@ -13,10 +13,10 @@
 - Auto resize
 - FullScreen
 - FullScreen resize
+- Progress Bar
 
 ## TODO
 - Playlist
-- Progress Bar
 - Fix Forward x -1
 - Visualiser for audio
 - Button loop play

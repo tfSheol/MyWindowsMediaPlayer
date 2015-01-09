@@ -28,7 +28,7 @@
         <Grid Name="ButtonGrid" Background="White" Opacity="100" MouseEnter="ButtonGrid_OnMouseEnter" MouseLeave="ButtonGrid_OnMouseLeave"
               VerticalAlignment="Bottom" Height="75" Width="535">
             <Slider Height="20" HorizontalAlignment="Left" Margin="265,22,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="150" Maximum="100" />
-            <Slider Height="20" HorizontalAlignment="Left" Margin="67,4,0,0" Name="PositionSlider" VerticalAlignment="Top" Width="401" />
+            <Slider Height="20" HorizontalAlignment="Left" Margin="67,4,0,0" Name="PositionSlider" ValueChanged="PositionSlider_OnValueChanged" VerticalAlignment="Top" Width="401" />
             <CheckBox Content="Mute" Height="16" HorizontalAlignment="Left" Margin="425,24,0,0" Name="MuteCheckBox" VerticalAlignment="Top" Click="Mute_CheckBox_Click" />
             <CheckBox Content="hide" Height="16" HorizontalAlignment="Left" Margin="425,50,0,0" Name="HideAll" VerticalAlignment="Top" Click="HideAll_OnClick" />
             <Label Content="0:00:00" Height="20" HorizontalAlignment="Left" Name="TimeMedia" VerticalAlignment="Top" Width="35" FontSize="10" Padding="0" Margin="12,4,0,0" />
