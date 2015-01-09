@@ -78,7 +78,6 @@ namespace MyWindowsMediaPlayer
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Seconds.ToString();
                 PositionSlider.Maximum = MyMediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 this.resize_Media_Player(this.media.Get_FullScreen());
-                CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
             }
         }
 
@@ -88,6 +87,8 @@ namespace MyWindowsMediaPlayer
             Play.Content = this.pause;
             PlayMenuItem.Header = "Pause";
             this.media.Update_Time(MyMediaPlayer);
+            if (this.media.Get_Reading_Playlist())
+                CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
         }
 
         private void Click_Stop(object sender, RoutedEventArgs args)
@@ -289,8 +290,16 @@ namespace MyWindowsMediaPlayer
             Playlist.ItemsSource = this.media.Get_PlayList().getList().ToArray();
         }
 
+        private void ShowLib(object sender, RoutedEventArgs args)
+        {
+            Console.WriteLine("lol");
+            Musics.ItemsSource = this.media.Get_Musics();
+            Photos.ItemsSource = this.media.Get_Photos();
+        }
+
         private void Playlist_Read(object sender, RoutedEventArgs args)
         {
+            CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
             if (this.media.Read_PlayList(MyMediaPlayer))
             {
                 if (this.media.Get_Played() == true)

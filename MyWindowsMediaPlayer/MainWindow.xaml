@@ -55,23 +55,26 @@
             <Button Height="30" HorizontalAlignment="Left" Margin="145,32,0,0" Name="SpeedRight" Click="Click_SpeedRight" VerticalAlignment="Top" Width="30" >
                 <Image Source="Ressource/avance_rapide.png" />
             </Button>
-            
+
             <Button Height="25" HorizontalAlignment="Left" Margin="222,37,0,0" Name="NextButton" VerticalAlignment="Top" Width="25" >
-            <Image Source="Ressource/suivant.png" />
+                <Image Source="Ressource/suivant.png" />
             </Button>
 
             <Button Height="25" HorizontalAlignment="Left" Margin="193,37,0,0" Name="PrevButton" VerticalAlignment="Top" Width="25" >
-            <Image Source="Ressource/precedent.png" />
+                <Image Source="Ressource/precedent.png" />
             </Button>
-            
+
             <Button Height="23" HorizontalAlignment="Left" Margin="491,43,0,0" Name="FullScreenButton" VerticalAlignment="Top" Width="29" Click="Full_Screen">
-            <Image Source="Ressource/fullScreen.png" />
+                <Image Source="Ressource/fullScreen.png" />
             </Button>
             <Label Height="28" HorizontalAlignment="Left" Margin="265,39,0,0" Name="CurrentPlay" VerticalAlignment="Top" Width="141" />
         </Grid>
-        <TreeView Name="tree" HorizontalAlignment="Left" Opacity="0" Height="363" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave">
-            <TreeViewItem Header="Playlist" Name="Playlist" Expanded="ShowPlaylist"/>
-            <TreeViewItem Header="Lib"/>
+        <TreeView Name="tree" HorizontalAlignment="Left" Opacity="100" Height="363" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave">
+            <TreeViewItem Header="Playlist" IsExpanded="False" Name="Playlist" Expanded="ShowPlaylist"/>
+            <TreeViewItem Header="Lib" IsExpanded="False"  Expanded="ShowLib">
+                <TreeViewItem Header="Musics" HorizontalAlignment="Left" Width="132" Name="Musics"/>
+                <TreeViewItem Header="Photos" HorizontalAlignment="Left" Width="132" Name="Photos"/>
+            </TreeViewItem>
         </TreeView>
         <TextBox Height="22" HorizontalAlignment="Left" Margin="175,332,0,0" Name="Debug" Visibility="Hidden" VerticalAlignment="Top" Width="353" />
     </Grid>

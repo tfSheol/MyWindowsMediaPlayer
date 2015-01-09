@@ -6,6 +6,8 @@ using System.Threading;
 using System.Windows.Threading;
 using Microsoft.Win32;
 
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows;
@@ -96,6 +98,11 @@ namespace MyWindowsMediaPlayer
         public void Set_Reading_Playlist(bool reading)
         {
             this.playlistReading = reading;
+        }
+
+        public bool Get_Reading_Playlist()
+        {
+            return this.playlistReading;
         }
 
         public void Stop(MediaElement mediaPlayer)
@@ -230,6 +237,36 @@ namespace MyWindowsMediaPlayer
             if (this.playlist.countLeft() == 0)
                 this.playlist.setCurrentMusic(-1);
             this.setCurrentMedia(playlist.getNextMusic(), mediaPlayer);
+        }
+
+        public String[] Get_Musics()
+        {
+            int i = -1;
+            String[] list = null;
+            /*
+            using (MediaLibrary library = new MediaLibrary())
+            {
+                list = new String[library.Songs.Count];
+                while (++i < library.Songs.Count)
+                {
+                    Console.WriteLine(library.Songs.ToArray()[i].Name);
+                    list[i] = library.Songs.ToArray()[i].Name;
+                }
+            }*/
+            return (list);
+        }
+
+        public String[] Get_Photos()
+        {/*
+            int i = -1;
+            String[] list = new String[this.library.Songs.Count];
+
+            while (++i < this.library.Pictures.Count)
+            {
+                list[i] = this.library.Pictures.ToArray()[i].Name;
+            }
+            return (list);*/
+            return (null);
         }
 
     }
