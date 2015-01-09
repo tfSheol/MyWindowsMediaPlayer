@@ -17,6 +17,13 @@
                 <MenuItem Header="Tools">
                     <MenuItem Name="MenuDebug" Header="Debug" Click="Checked_Debug" />
                 </MenuItem>
+                <MenuItem Header="Playlist">
+                    <MenuItem Header="Read" Click="Playlist_Read"/>
+                    <MenuItem Header="Add" Click="Playlist_Add"/>
+                    <MenuItem Header="Remove" Click="Playlist_Remove"/>
+                    <MenuItem Header="Save" Click="Playlist_Save"/>
+                    <MenuItem Header="Load" Click="Playlist_Load"/>
+                </MenuItem>
             </Menu>
         </Grid>
         <MediaElement Height="363" HorizontalAlignment="Left" 
@@ -60,8 +67,12 @@
             <Button Height="23" HorizontalAlignment="Left" Margin="491,43,0,0" Name="FullScreenButton" VerticalAlignment="Top" Width="29" Click="Full_Screen">
             <Image Source="Ressource/fullScreen.png" />
             </Button>
-            <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="265,39,0,0" Name="label1" VerticalAlignment="Top" Width="141" />
+            <Label Height="28" HorizontalAlignment="Left" Margin="265,39,0,0" Name="CurrentPlay" VerticalAlignment="Top" Width="141" />
         </Grid>
+        <TreeView Name="tree" HorizontalAlignment="Left" Opacity="0" Height="363" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave">
+            <TreeViewItem Header="Playlist" Name="Playlist" Expanded="ShowPlaylist"/>
+            <TreeViewItem Header="Lib"/>
+        </TreeView>
         <TextBox Height="22" HorizontalAlignment="Left" Margin="175,332,0,0" Name="Debug" Visibility="Hidden" VerticalAlignment="Top" Width="353" />
     </Grid>
 </Window>

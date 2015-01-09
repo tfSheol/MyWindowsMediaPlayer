@@ -44,6 +44,7 @@ namespace MyWindowsMediaPlayer
 
         private void Click_Open(object sender, RoutedEventArgs args)
         {
+            this.media.Set_Reading_Playlist(false);
             if (this.media.OpenFile(MyMediaPlayer) == true)
             {
                 Play.Content = pause;
@@ -77,6 +78,7 @@ namespace MyWindowsMediaPlayer
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Seconds.ToString();
                 PositionSlider.Maximum = MyMediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 this.resize_Media_Player(this.media.Get_FullScreen());
+                CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
             }
         }
 
@@ -263,5 +265,63 @@ namespace MyWindowsMediaPlayer
         {
             this.media.Change_Time_Media(MyMediaPlayer, PositionSlider);
         }
+        /*------------------------------------------------------------------------------------*/
+
+        private void Tree_Over(object sender, RoutedEventArgs args)
+        {
+            tree.Opacity = 100;
+            tree.Height = this.Height - 60 - ButtonGrid.Height;
+        }
+
+        private void Tree_Leave(object sender, RoutedEventArgs args)
+        {
+            tree.Opacity = 0;
+        }
+
+        private void Playlist_Add(object sender, RoutedEventArgs args)
+        {
+            this.media.Add_PlayList(MyMediaPlayer);
+            this.ShowPlaylist(sender, args);
+        }
+
+        private void ShowPlaylist(object sender, RoutedEventArgs args)
+        {
+            Playlist.ItemsSource = this.media.Get_PlayList().getList().ToArray();
+        }
+
+        private void Playlist_Read(object sender, RoutedEventArgs args)
+        {
+            if (this.media.Read_PlayList(MyMediaPlayer))
+            {
+                if (this.media.Get_Played() == true)
+                {
+                    Play.Content = this.pause;
+                    PlayMenuItem.Header = "Pause";
+                }
+                else
+                {
+                    Play.Content = this.play;
+                    PlayMenuItem.Header = "Play";
+                }
+            }
+        }
+
+        private void Playlist_Remove(object sender, RoutedEventArgs args)
+        {
+            if (this.media.Remove_PlaList(tree))
+                this.ShowPlaylist(sender, args);
+        }
+
+        private void Playlist_Save(object sender, RoutedEventArgs args)
+        {
+            this.media.Save_PlayList(MyMediaPlayer);
+        }
+
+        private void Playlist_Load(object sender, RoutedEventArgs args)
+        {
+            this.media.Load_PlayList(MyMediaPlayer);
+            this.ShowPlaylist(sender, args);
+        }
+
     }
 }

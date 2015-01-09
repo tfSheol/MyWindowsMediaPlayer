@@ -24,6 +24,10 @@ namespace MyWindowsMediaPlayer
             else
                 return false;
         }
+        public void setPathFile(String music)
+        {
+           _pathFile = music;
+        }
 
         public void setPathFile()
         {

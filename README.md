@@ -14,9 +14,9 @@
 - FullScreen
 - FullScreen resize
 - Progress Bar
+- Playlist
 
 ## TODO
-- Playlist
 - Fix Forward x -1
 - Visualiser for audio
 - Button loop play
