@@ -128,10 +128,9 @@ namespace MyWindowsMediaPlayer
 
         public void SpeedRight(MediaElement mediaPlayer)
         {
-            if (this._played == true)
+            if (this._played)
             {
                 mediaPlayer.SpeedRatio = mediaPlayer.SpeedRatio*2;
-                _played = false;
             }
         }
 
