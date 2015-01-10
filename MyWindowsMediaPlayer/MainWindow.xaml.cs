@@ -190,8 +190,6 @@ namespace MyWindowsMediaPlayer
             this.Full_Screen(null, null);
         }
 
-        // probleme a fix sur resize non fullscreen
-
         private void resize_Media_Player(bool fullscreen)
         {
             bool _height;
@@ -235,7 +233,6 @@ namespace MyWindowsMediaPlayer
                     MyMediaPlayer.Height = MyWindow.Height;
                     MyMediaPlayer.Width = (((MyMediaPlayer.Height - 50) * MyMediaPlayer.NaturalVideoWidth) /
                                             MyMediaPlayer.NaturalVideoHeight);
-
                     MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
                 }
                 else
@@ -325,6 +322,7 @@ namespace MyWindowsMediaPlayer
 
         private void Playlist_Read(object sender, RoutedEventArgs args)
         {
+<<<<<<< HEAD
             if (this.media.Get_PlayList().getList().Count() != 0)
                 CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
             else
@@ -333,6 +331,9 @@ namespace MyWindowsMediaPlayer
                 if (this.media.Get_PlayList().getList().Count() != 0)
                     CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
             }
+=======
+//            CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
+>>>>>>> dce519611cf4a28fec77d36a23a82e8ceb7ec169
             if (this.media.Read_PlayList(MyMediaPlayer))
             {
                 if (this.media.Get_Played() == true)
