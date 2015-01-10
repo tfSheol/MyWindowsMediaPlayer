@@ -77,7 +77,13 @@ namespace MyWindowsMediaPlayer
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Minutes.ToString() + ":"
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Seconds.ToString();
                 PositionSlider.Maximum = MyMediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                this.resize_Media_Player(this.media.Get_FullScreen());
+                MyMediaPlayer.Width = MyMediaPlayer.NaturalVideoWidth;
+                MyMediaPlayer.Height = MyMediaPlayer.NaturalVideoHeight;
+                if (MyMediaPlayer.Width > 535 && MyMediaPlayer.Height > 95)
+                {
+                    MyWindow.Width = MyMediaPlayer.Width + 16;
+                    MyWindow.Height = MyMediaPlayer.Height + 50;
+                }
             }
         }
 
@@ -220,55 +226,30 @@ namespace MyWindowsMediaPlayer
             }
             else
             {
-                _height = false;
-                if (MyMediaPlayer.NaturalVideoWidth * (MyWindow.Height - 50) - MyMediaPlayer.NaturalVideoHeight * (MyWindow.Width - 4)> 0)
+            _height = false;
+                if (MyMediaPlayer.NaturalVideoWidth * (MyWindow.Height - 50) - MyMediaPlayer.NaturalVideoHeight * (MyWindow.Width - 16) > 0)
                     _height = true;
                 if (!_height)
                 {
                     MyMediaPlayer.Height = MyWindow.Height;
-                    MyMediaPlayer.Width = ((MyMediaPlayer.Height - 50) * MyMediaPlayer.NaturalVideoWidth) /
-                                            MyMediaPlayer.NaturalVideoHeight;
+                    MyMediaPlayer.Width = (((MyMediaPlayer.Height - 50) * MyMediaPlayer.NaturalVideoWidth) /
+                                            MyMediaPlayer.NaturalVideoHeight);
 
                     MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
                 }
                 else
                 {
-                    MyMediaPlayer.Width = MyWindow.Width - 4;
+                    MyMediaPlayer.Width = MyWindow.Width - 16;
                     MyMediaPlayer.Height = ((MyMediaPlayer.Width - 4) * MyMediaPlayer.NaturalVideoHeight) /
                                             MyMediaPlayer.NaturalVideoWidth;
 
-                    MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
+                    MyMediaPlayer.Margin = new Thickness(0, ((MyWindow.Height - MyMediaPlayer.Height) / 2) - 20, 0, 0);
                 }
-                /*
-                MyMediaPlayer.Height = MyWindow.Height - 40;
-                if (height != 0)
-                {
-                    MyMediaPlayer.Width = (MyMediaPlayer.Height * MyMediaPlayer.NaturalVideoWidth) /
-                                          MyMediaPlayer.NaturalVideoHeight;
-                }
-                else
-                {
-                    MyMediaPlayer.Height = (MyMediaPlayer.Width*MyMediaPlayer.NaturalVideoHeight)/
-                                           MyMediaPlayer.NaturalVideoWidth;
-                }
-                if (this.media.Get_Hide() == true)
-                {
-                    if (MyMediaPlayer.NaturalVideoWidth != 0 || height != 0)
-                        MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
-                    else
-                        MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
-                }
-                else
-                {
-                    if (MyMediaPlayer.NaturalVideoWidth != 0 || height != 0)
-                        MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
-                    else
-                        MyMediaPlayer.Margin = new Thickness(0, 20, 0, 0);
-                    MyMediaPlayer.VerticalAlignment = VerticalAlignment.Top;
-                }
-                MyMediaPlayer.Width = MyWindow.Width - 15;
-                 * */
             }
+            if (!this.media.Get_Hide())
+                tree.Margin = new Thickness(MyWindow.Width - 157, 20, 0, 0);
+            else
+                tree.Margin = new Thickness(MyWindow.Width - 157, 0, 0, 0);
             Debug.Text += _height.ToString();
         }
 
