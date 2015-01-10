@@ -56,11 +56,11 @@
                 <Image Source="Ressource/avance_rapide.png" />
             </Button>
 
-            <Button Height="25" HorizontalAlignment="Left" Margin="222,37,0,0" Name="NextButton" VerticalAlignment="Top" Width="25" >
+            <Button Height="25" HorizontalAlignment="Left" Margin="222,37,0,0" Name="NextButton" Click="Click_Next" VerticalAlignment="Top" Width="25" >
                 <Image Source="Ressource/suivant.png" />
             </Button>
 
-            <Button Height="25" HorizontalAlignment="Left" Margin="193,37,0,0" Name="PrevButton" VerticalAlignment="Top" Width="25" >
+            <Button Height="25" HorizontalAlignment="Left" Margin="193,37,0,0" Name="PrevButton" Click="Click_Prev" VerticalAlignment="Top" Width="25" >
                 <Image Source="Ressource/precedent.png" />
             </Button>
 

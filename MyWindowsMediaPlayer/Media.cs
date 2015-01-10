@@ -267,5 +267,44 @@ namespace MyWindowsMediaPlayer
             return (null);
         }
 
+        public String Next_Click(MediaElement mediaPlayer)
+        {
+            if (this.playlistReading)
+            {
+                if (this.playlist.countLeft() != 0)
+                    this.playlist.setCurrentMusic(this.playlist.getCurrentMusic() + 1);
+                else
+                    this.playlist.setCurrentMusic(-1);
+                if (this.setCurrentMedia(this.playlist.getList().ElementAt(this.playlist.getCurrentMusic()), mediaPlayer))
+                {
+                    this.InitAll(mediaPlayer);
+                    this._played = true;
+                    this.dispatcherTimer.Start();
+                    mediaPlayer.Play();
+                    return this.playlist.getList().ElementAt(this.playlist.getCurrentMusic());
+                }
+            }
+            return null;
+        }
+
+        public String Prev_Click(MediaElement mediaPlayer)
+        {
+            if (this.playlistReading)
+            {
+                if (this.playlist.getCurrentMusic() != 0)
+                    this.playlist.setCurrentMusic(this.playlist.getCurrentMusic() - 1);
+                else
+                    this.playlist.setCurrentMusic(this.playlist.getList().Count - 1);
+                if (this.setCurrentMedia(this.playlist.getList().ElementAt(this.playlist.getCurrentMusic()), mediaPlayer))
+                {
+                    this.InitAll(mediaPlayer);
+                    this._played = true;
+                    this.dispatcherTimer.Start();
+                    mediaPlayer.Play();
+                    return this.playlist.getList().ElementAt(this.playlist.getCurrentMusic());
+                }
+            }
+            return null;
+        }
     }
 }

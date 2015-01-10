@@ -365,5 +365,22 @@ namespace MyWindowsMediaPlayer
             this.ShowPlaylist(sender, args);
         }
 
+        private void Click_Prev(object sender, RoutedEventArgs args)
+        {
+            String name;
+
+            name = this.media.Prev_Click(this.MyMediaPlayer);
+            if (name != null)
+                this.CurrentPlay.Content = name;
+        }
+
+        private void Click_Next(object sender, RoutedEventArgs args)
+        {
+            String name;
+
+            name = this.media.Next_Click(this.MyMediaPlayer);
+            if (name != null)
+                this.CurrentPlay.Content = name;
+        }
     }
 }
