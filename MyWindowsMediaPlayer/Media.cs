@@ -203,7 +203,6 @@ namespace MyWindowsMediaPlayer
 
         public bool Read_PlayList(MediaElement mediaPlayer)
         {
-            Console.WriteLine("lol" + this.playlist.getList().Count());
             if (this.playlist.getList().Count() == 0)
                 return false;
             this.playlistReading = true;
@@ -248,9 +247,9 @@ namespace MyWindowsMediaPlayer
 
         public String[] Get_Musics()
         {
-            int i = -1;
             String[] list = null;
             /*
+            int i = -1;
             using (MediaLibrary library = new MediaLibrary())
             {
                 list = new String[library.Songs.Count];

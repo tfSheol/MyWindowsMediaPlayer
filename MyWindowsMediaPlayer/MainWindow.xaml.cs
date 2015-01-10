@@ -322,7 +322,6 @@ namespace MyWindowsMediaPlayer
 
         private void Playlist_Read(object sender, RoutedEventArgs args)
         {
-<<<<<<< HEAD
             if (this.media.Get_PlayList().getList().Count() != 0)
                 CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
             else
@@ -331,9 +330,6 @@ namespace MyWindowsMediaPlayer
                 if (this.media.Get_PlayList().getList().Count() != 0)
                     CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
             }
-=======
-//            CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
->>>>>>> dce519611cf4a28fec77d36a23a82e8ceb7ec169
             if (this.media.Read_PlayList(MyMediaPlayer))
             {
                 if (this.media.Get_Played() == true)
@@ -393,11 +389,6 @@ namespace MyWindowsMediaPlayer
                     if (File.Exists(fileLoc))
                         this.media.Get_PlayList().addAMusic(fileLoc);
             }
-        }
-
-        ~MainWindow()
-        {
-            this.media.Save_PlayList(MyMediaPlayer);
         }
     }
 }

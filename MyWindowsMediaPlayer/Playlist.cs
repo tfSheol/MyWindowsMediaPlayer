@@ -25,6 +25,10 @@ namespace MyWindowsMediaPlayer
             CurrentMusic = 0;
             Musics = new List<string>();
         }
+        ~Playlist()
+        {
+            this.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\my_playlist.xml");
+        }
 
         public void Save(string path)
  	    {
