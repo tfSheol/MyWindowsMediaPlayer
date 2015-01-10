@@ -6,8 +6,6 @@ using System.Threading;
 using System.Windows.Threading;
 using Microsoft.Win32;
 
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Media;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows;

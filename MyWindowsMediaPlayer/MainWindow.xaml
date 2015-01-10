@@ -4,6 +4,12 @@
         Title="MyWindowsMediaPlayer" Height="500" Width="550" Name="MyWindow" MouseDoubleClick="MainWindow_OnMouseDoubleClick" ResizeMode="CanResizeWithGrip" 
         SizeChanged="MainWindow_OnSizeChanged" MinHeight="130" MinWidth="535">
     <Grid Background="Black">
+        <MediaElement Height="363" HorizontalAlignment="Left" 
+                    Margin="0,20,0,0" Name="MyMediaPlayer"
+                    VerticalAlignment="Top" Width="535"
+                    LoadedBehavior="Manual" UnloadedBehavior="Stop" 
+                    MediaOpened="Opened_Media" MediaEnded="Update_Time" 
+                    Stretch="Fill" />
         <Grid Name="MenuGrid" Opacity="100" MouseEnter="MenuGrid_OnMouseEnter" MouseLeave="MenuGrid_OnMouseLeave">
             <Menu Height="20" Name="Menu" VerticalAlignment="Top">
                 <MenuItem Header="Media">
@@ -26,12 +32,6 @@
                 </MenuItem>
             </Menu>
         </Grid>
-        <MediaElement Height="363" HorizontalAlignment="Left" 
-                    Margin="0,20,0,0" Name="MyMediaPlayer"
-                    VerticalAlignment="Top" Width="535"
-                    LoadedBehavior="Manual" UnloadedBehavior="Stop" 
-                    MediaOpened="Opened_Media" MediaEnded="Update_Time" 
-                    Stretch="Fill" />
         <Grid Name="ButtonGrid" Background="White" Opacity="100" MouseEnter="ButtonGrid_OnMouseEnter" MouseLeave="ButtonGrid_OnMouseLeave"
               VerticalAlignment="Bottom" Height="75" Width="535">
             <Slider Height="20" HorizontalAlignment="Left" Margin="265,22,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="150" Maximum="100" />
@@ -76,6 +76,6 @@
                 <TreeViewItem Header="Photos" HorizontalAlignment="Left" Width="132" Name="Photos"/>
             </TreeViewItem>
         </TreeView>
-        <TextBox Height="22" HorizontalAlignment="Left" Margin="175,332,0,0" Name="Debug" Visibility="Hidden" VerticalAlignment="Top" Width="353" />
+        <TextBox Height="22" HorizontalAlignment="Left" Margin="12,37,0,0" Name="Debug" Visibility="Hidden" VerticalAlignment="Top" Width="353" />
     </Grid>
 </Window>
