@@ -3,68 +3,100 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace MyWindowsMediaPlayer
 {
+    [DataContract]
     public class Playlist
     {
-        private bool _start = true;
-        private List<String> _musics;
-        private int _currentMusic;
+        [DataMember]
+        private bool Start = true;
+        [DataMember]
+        private List<String> Musics;
+        [DataMember]
+        private int CurrentMusic;
 
         public Playlist()
         {
-            _currentMusic = 0;
-            _musics = new List<string>();
+            CurrentMusic = 0;
+            Musics = new List<string>();
+        }
+
+        public void Save(string path)
+ 	    {
+            var serializer = new DataContractSerializer(this.GetType());
+ 		    using(var stream = new FileStream(path, FileMode.Create))
+ 		    {
+ 			    serializer.WriteObject(stream, this);
+ 		    }
+ 	    }
+
+        public static Playlist Load(string path)
+        {
+            var serializer = new DataContractSerializer(typeof(Playlist));
+            if (File.Exists(path))
+            {
+                using (var stream = new FileStream(path, FileMode.Open))
+                {
+                    return serializer.ReadObject(stream) as Playlist;
+                }
+            }
+            return null;
         }
 
         public void addAMusic(String path)
         {
             if (File.Exists(path))
-                _musics.Add(path);
+            {
+                Musics.Add(path);
+                this.setCurrentMusic(-1);
+            }
         }
 
         public void delMusicFromPlaylist(int id)
         {
-            if (_currentMusic + 1 == _musics.Count())
-                --_currentMusic;
-            if (id < _musics.Count())
-                _musics.RemoveAt(id);
+            if (CurrentMusic + 1 == Musics.Count())
+                --CurrentMusic;
+            if (id < Musics.Count())
+                Musics.RemoveAt(id);
         }
 
         public void setCurrentMusic(int id)
         {
             if (id > -1)
-                _currentMusic = id;
+                CurrentMusic = id;
             else
             {
-                _start = true;
-                _currentMusic = 0;
+                Start = true;
+                CurrentMusic = 0;
             }
         }
 
         public int getCurrentMusic()
         {
-            return (_currentMusic);
+            return (CurrentMusic);
         }
 
         public String getNextMusic()
         {
-            if (_currentMusic + 1 < _musics.Count() && _currentMusic + 1 >= 0)
+            if (CurrentMusic + 1 < Musics.Count() && CurrentMusic + 1 >= 0)
             {
-                if (_start)
-                    _start = false;
+                if (Start)
+                    Start = false;
                 else
-                    ++_currentMusic;
-                return (_musics.ElementAt(_currentMusic));
+                    ++CurrentMusic;
+                return (Musics.ElementAt(CurrentMusic));
             }
             return null;
         }
 
         public List<String> getList()
         {
-            return (_musics);
+            return (Musics);
         }
 
         private string openOneFile()
@@ -83,16 +115,19 @@ namespace MyWindowsMediaPlayer
 
             path = openOneFile();
             if (path != null && File.Exists(path))
-                _musics.Add(path);
+            {
+                Musics.Add(path);
+                this.setCurrentMusic(-1);
+            }
         }
 
         public int findIndexOf(String str)
         {
             int i = -1;
 
-            while (_musics.Count() > ++i)
+            while (Musics.Count() > ++i)
             {
-                if (str.Equals(_musics.ElementAt(i)))
+                if (str.Equals(Musics.ElementAt(i)))
                     return (i);
             }
             return (-1);
@@ -100,7 +135,7 @@ namespace MyWindowsMediaPlayer
 
         public int countLeft()
         {
-            return (_musics.Count() - (_currentMusic + 1));
+            return (Musics.Count() - (CurrentMusic + 1));
         }
     }
 }

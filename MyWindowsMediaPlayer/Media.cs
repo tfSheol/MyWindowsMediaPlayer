@@ -6,8 +6,6 @@ using System.Threading;
 using System.Windows.Threading;
 using Microsoft.Win32;
 
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Media;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows;
@@ -19,7 +17,7 @@ namespace MyWindowsMediaPlayer
     {
         private MediaOpenFile openFile = new MediaOpenFile();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private Playlist playlist = new Playlist();
+        private Playlist playlist;
 
         private bool playlistReading = false;
         private bool _played = false;
@@ -30,6 +28,16 @@ namespace MyWindowsMediaPlayer
         {
             this.dispatcherTimer.Tick += new EventHandler((sender, e) => Timer_Tick(sender, e, mediaPlayer, positionSlider));
             this.dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\my_playlist.xml"))
+            {
+                try {
+                    this.playlist = Playlist.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\my_playlist.xml");
+                } catch (Exception) {
+                    playlist = new Playlist();
+                }
+            }
+            else
+                playlist = new Playlist();
         }
 
         private void Timer_Tick(object sender, EventArgs e, MediaElement mediaPlayer, Slider slider)
@@ -223,7 +231,7 @@ namespace MyWindowsMediaPlayer
 
         public void Save_PlayList(MediaElement mediaPlayer)
         {
-            SaveData.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\my_playlist.xml", this.playlist);
+            this.playlist.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\my_playlist.xml");
             if (playlist.countLeft() == 0)
                 playlist.setCurrentMusic(-1);
             this.setCurrentMedia(playlist.getNextMusic(), mediaPlayer);
@@ -233,7 +241,7 @@ namespace MyWindowsMediaPlayer
         public void Load_PlayList(MediaElement mediaPlayer)
         {
             this.playlistReading = true;
-            this.playlist = SaveData.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\my_playlist.xml");
+            this.playlist = Playlist.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\my_playlist.xml");
             if (this.playlist.countLeft() == 0)
                 this.playlist.setCurrentMusic(-1);
             this.setCurrentMedia(playlist.getNextMusic(), mediaPlayer);
@@ -269,5 +277,44 @@ namespace MyWindowsMediaPlayer
             return (null);
         }
 
+        public String Next_Click(MediaElement mediaPlayer)
+        {
+            if (this.playlistReading)
+            {
+                if (this.playlist.countLeft() != 0)
+                    this.playlist.setCurrentMusic(this.playlist.getCurrentMusic() + 1);
+                else
+                    this.playlist.setCurrentMusic(-1);
+                if (this.setCurrentMedia(this.playlist.getList().ElementAt(this.playlist.getCurrentMusic()), mediaPlayer))
+                {
+                    this.InitAll(mediaPlayer);
+                    this._played = true;
+                    this.dispatcherTimer.Start();
+                    mediaPlayer.Play();
+                    return this.playlist.getList().ElementAt(this.playlist.getCurrentMusic());
+                }
+            }
+            return null;
+        }
+
+        public String Prev_Click(MediaElement mediaPlayer)
+        {
+            if (this.playlistReading)
+            {
+                if (this.playlist.getCurrentMusic() != 0)
+                    this.playlist.setCurrentMusic(this.playlist.getCurrentMusic() - 1);
+                else
+                    this.playlist.setCurrentMusic(this.playlist.getList().Count - 1);
+                if (this.setCurrentMedia(this.playlist.getList().ElementAt(this.playlist.getCurrentMusic()), mediaPlayer))
+                {
+                    this.InitAll(mediaPlayer);
+                    this._played = true;
+                    this.dispatcherTimer.Start();
+                    mediaPlayer.Play();
+                    return this.playlist.getList().ElementAt(this.playlist.getCurrentMusic());
+                }
+            }
+            return null;
+        }
     }
 }

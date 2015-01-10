@@ -12,8 +12,13 @@ namespace MyWindowsMediaPlayer
 {
     class SaveData
     {
-        public static void Save(String path, Playlist data)
+        public static void Save<T>(String path, T data)
         {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            FileStream stream = new FileStream(path, FileMode.Create);
+            serializer.Serialize(stream, data);
+            stream.Close();
+            /*
             int i = -1;
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.Indent = true;
@@ -29,17 +34,24 @@ namespace MyWindowsMediaPlayer
             }
             writer.WriteEndElement();
             writer.WriteEndDocument();
-            writer.Close();
+            writer.Close();*/
         }
 
-        public static Playlist Load(String path)
+        public static T Load<T>(String path)
         {
+            T data;
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("MyFile.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+            data = (T)formatter.Deserialize(stream);
+            stream.Close();
+            return data;
+            /*
             XmlReader reader = XmlReader.Create(path);
-            Playlist playlist = new Playlist();
+            T data = new Playlist();
 
             while (reader.Read())
             {
-                playlist.addAMusic(reader.Value);
+                data.addAMusic(reader.Value);
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
@@ -49,7 +61,7 @@ namespace MyWindowsMediaPlayer
                 }
             }
             reader.Close();
-            return (playlist);
+            return (data);*/
         }
     }
 }

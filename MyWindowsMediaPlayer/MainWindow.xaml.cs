@@ -77,7 +77,13 @@ namespace MyWindowsMediaPlayer
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Minutes.ToString() + ":"
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Seconds.ToString();
                 PositionSlider.Maximum = MyMediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                this.resize_Media_Player(this.media.Get_FullScreen());
+                MyMediaPlayer.Width = MyMediaPlayer.NaturalVideoWidth;
+                MyMediaPlayer.Height = MyMediaPlayer.NaturalVideoHeight;
+                if (MyMediaPlayer.Width > 535 && MyMediaPlayer.Height > 95)
+                {
+                    MyWindow.Width = MyMediaPlayer.Width + 16;
+                    MyWindow.Height = MyMediaPlayer.Height + 50;
+                }
             }
         }
 
@@ -187,13 +193,14 @@ namespace MyWindowsMediaPlayer
 
         private void resize_Media_Player(bool fullscreen)
         {
-            int height = 0;
+            bool _height;
 
-            if (MyMediaPlayer.NaturalVideoHeight > MyMediaPlayer.NaturalVideoWidth)
-                height = MyMediaPlayer.NaturalVideoHeight;
+            _height = false;
+            if (MyMediaPlayer.NaturalVideoWidth*MyWindow.Height - MyMediaPlayer.NaturalVideoHeight*MyWindow.Width > 0)
+                _height = true;
             if (fullscreen == true)
             {
-                if (height != 0)
+                if (!_height)
                 {
                     MyMediaPlayer.Height = MyWindow.Height;
                     MyMediaPlayer.Width = (MyMediaPlayer.Height*MyMediaPlayer.NaturalVideoWidth)/
@@ -205,41 +212,45 @@ namespace MyWindowsMediaPlayer
                     MyMediaPlayer.Height = (MyMediaPlayer.Width*MyMediaPlayer.NaturalVideoHeight)/
                                             MyMediaPlayer.NaturalVideoWidth;
                 }
-                if (MyMediaPlayer.NaturalVideoWidth != 0 || height != 0)
-                    MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
+                tree.Height = MyWindow.Height;
+                if (MyMediaPlayer.NaturalVideoWidth != 0 || MyMediaPlayer.NaturalVideoHeight != 0)
+                {
+                    MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height)/2, 0, 0);
+                    tree.Margin = new Thickness(MyWindow.Width - 157, 20, 0, 0);
+                }
                 else
+                {
                     MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
+                    tree.Margin = new Thickness(MyWindow.Width - 157, 0, 0, 0);
+                }
             }
             else
             {
-                MyMediaPlayer.Height = MyWindow.Height - 40;
-                if (height != 0)
+            _height = false;
+                if (MyMediaPlayer.NaturalVideoWidth * (MyWindow.Height - 50) - MyMediaPlayer.NaturalVideoHeight * (MyWindow.Width - 16) > 0)
+                    _height = true;
+                if (!_height)
                 {
-                    MyMediaPlayer.Width = (MyMediaPlayer.Height * MyMediaPlayer.NaturalVideoWidth) /
-                                          MyMediaPlayer.NaturalVideoHeight;
+                    MyMediaPlayer.Height = MyWindow.Height;
+                    MyMediaPlayer.Width = (((MyMediaPlayer.Height - 50) * MyMediaPlayer.NaturalVideoWidth) /
+                                            MyMediaPlayer.NaturalVideoHeight);
+
+                    MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
                 }
                 else
                 {
-                    MyMediaPlayer.Height = (MyMediaPlayer.Width*MyMediaPlayer.NaturalVideoHeight)/
-                                           MyMediaPlayer.NaturalVideoWidth;
+                    MyMediaPlayer.Width = MyWindow.Width - 16;
+                    MyMediaPlayer.Height = ((MyMediaPlayer.Width - 4) * MyMediaPlayer.NaturalVideoHeight) /
+                                            MyMediaPlayer.NaturalVideoWidth;
+
+                    MyMediaPlayer.Margin = new Thickness(0, ((MyWindow.Height - MyMediaPlayer.Height) / 2) - 20, 0, 0);
                 }
-                if (this.media.Get_Hide() == true)
-                {
-                    if (MyMediaPlayer.NaturalVideoWidth != 0 || height != 0)
-                        MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
-                    else
-                        MyMediaPlayer.Margin = new Thickness(0, 0, 0, 0);
-                }
-                else
-                {
-                    if (MyMediaPlayer.NaturalVideoWidth != 0 || height != 0)
-                        MyMediaPlayer.Margin = new Thickness(0, (MyWindow.Height - MyMediaPlayer.Height) / 2, 0, 0);
-                    else
-                        MyMediaPlayer.Margin = new Thickness(0, 20, 0, 0);
-                    MyMediaPlayer.VerticalAlignment = VerticalAlignment.Top;
-                }
-                MyMediaPlayer.Width = MyWindow.Width - 15;
             }
+            if (!this.media.Get_Hide())
+                tree.Margin = new Thickness(MyWindow.Width - 157, 20, 0, 0);
+            else
+                tree.Margin = new Thickness(MyWindow.Width - 157, 0, 0, 0);
+            Debug.Text += _height.ToString();
         }
 
         private void HideAll_OnClick(object sender, RoutedEventArgs e)
@@ -271,7 +282,10 @@ namespace MyWindowsMediaPlayer
         private void Tree_Over(object sender, RoutedEventArgs args)
         {
             tree.Opacity = 100;
-            tree.Height = this.Height - 60 - ButtonGrid.Height;
+            if (this.Height - 60 - ButtonGrid.Height >= 0)
+                tree.Height = this.Height - 60 - ButtonGrid.Height;
+            else
+                tree.Height = 0;
         }
 
         private void Tree_Leave(object sender, RoutedEventArgs args)
@@ -332,5 +346,22 @@ namespace MyWindowsMediaPlayer
             this.ShowPlaylist(sender, args);
         }
 
+        private void Click_Prev(object sender, RoutedEventArgs args)
+        {
+            String name;
+
+            name = this.media.Prev_Click(this.MyMediaPlayer);
+            if (name != null)
+                this.CurrentPlay.Content = name;
+        }
+
+        private void Click_Next(object sender, RoutedEventArgs args)
+        {
+            String name;
+
+            name = this.media.Next_Click(this.MyMediaPlayer);
+            if (name != null)
+                this.CurrentPlay.Content = name;
+        }
     }
 }

@@ -2,8 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MyWindowsMediaPlayer" Height="500" Width="550" Name="MyWindow" MouseDoubleClick="MainWindow_OnMouseDoubleClick" ResizeMode="CanResizeWithGrip" 
-        SizeChanged="MainWindow_OnSizeChanged" MinHeight="130" MinWidth="535">
+        SizeChanged="MainWindow_OnSizeChanged" MinHeight="133" MinWidth="535">
     <Grid Background="Black">
+        <MediaElement Height="363" HorizontalAlignment="Left" 
+                    Margin="0,20,0,0" Name="MyMediaPlayer"
+                    VerticalAlignment="Top" Width="535"
+                    LoadedBehavior="Manual" UnloadedBehavior="Stop" 
+                    MediaOpened="Opened_Media" MediaEnded="Update_Time" 
+                    Stretch="Fill" />
         <Grid Name="MenuGrid" Opacity="100" MouseEnter="MenuGrid_OnMouseEnter" MouseLeave="MenuGrid_OnMouseLeave">
             <Menu Height="20" Name="Menu" VerticalAlignment="Top">
                 <MenuItem Header="Media">
@@ -26,12 +32,6 @@
                 </MenuItem>
             </Menu>
         </Grid>
-        <MediaElement Height="363" HorizontalAlignment="Left" 
-                    Margin="0,20,0,0" Name="MyMediaPlayer"
-                    VerticalAlignment="Top" Width="535"
-                    LoadedBehavior="Manual" UnloadedBehavior="Stop" 
-                    MediaOpened="Opened_Media" MediaEnded="Update_Time" 
-                    Stretch="Fill" />
         <Grid Name="ButtonGrid" Background="White" Opacity="100" MouseEnter="ButtonGrid_OnMouseEnter" MouseLeave="ButtonGrid_OnMouseLeave"
               VerticalAlignment="Bottom" Height="75" Width="535">
             <Slider Height="20" HorizontalAlignment="Left" Margin="265,22,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="150" Maximum="100" />
@@ -56,11 +56,11 @@
                 <Image Source="Ressource/avance_rapide.png" />
             </Button>
 
-            <Button Height="25" HorizontalAlignment="Left" Margin="222,37,0,0" Name="NextButton" VerticalAlignment="Top" Width="25" >
+            <Button Height="25" HorizontalAlignment="Left" Margin="222,37,0,0" Name="NextButton" Click="Click_Next" VerticalAlignment="Top" Width="25" >
                 <Image Source="Ressource/suivant.png" />
             </Button>
 
-            <Button Height="25" HorizontalAlignment="Left" Margin="193,37,0,0" Name="PrevButton" VerticalAlignment="Top" Width="25" >
+            <Button Height="25" HorizontalAlignment="Left" Margin="193,37,0,0" Name="PrevButton" Click="Click_Prev" VerticalAlignment="Top" Width="25" >
                 <Image Source="Ressource/precedent.png" />
             </Button>
 
@@ -69,13 +69,13 @@
             </Button>
             <Label Height="28" HorizontalAlignment="Left" Margin="265,39,0,0" Name="CurrentPlay" VerticalAlignment="Top" Width="141" />
         </Grid>
-        <TreeView Name="tree" HorizontalAlignment="Left" Opacity="100" Height="363" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave">
+        <TreeView Name="tree" HorizontalAlignment="Left" Opacity="0" Height="363" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave">
             <TreeViewItem Header="Playlist" IsExpanded="False" Name="Playlist" Expanded="ShowPlaylist"/>
             <TreeViewItem Header="Lib" IsExpanded="False"  Expanded="ShowLib">
                 <TreeViewItem Header="Musics" HorizontalAlignment="Left" Width="132" Name="Musics"/>
                 <TreeViewItem Header="Photos" HorizontalAlignment="Left" Width="132" Name="Photos"/>
             </TreeViewItem>
         </TreeView>
-        <TextBox Height="22" HorizontalAlignment="Left" Margin="175,332,0,0" Name="Debug" Visibility="Hidden" VerticalAlignment="Top" Width="353" />
+        <TextBox Height="22" HorizontalAlignment="Left" Margin="12,37,0,0" Name="Debug" Visibility="Hidden" VerticalAlignment="Top" Width="353" />
     </Grid>
 </Window>
