@@ -112,13 +112,6 @@ namespace MyWindowsMediaPlayer
             Debug.Text = "Volume : " + MyMediaPlayer.SpeedRatio.ToString();
         }
 
-        private void Click_SpeedLeft(object sender, RoutedEventArgs args)
-        {
-//            MyMediaPlayer.Position = MyMediaPlayer.Position - TimeSpan.FromSeconds(10);
-//            MyMediaPlayer.SpeedRatio = MyMediaPlayer.SpeedRatio * 2;
-            Debug.Text = "Speed : x" + MyMediaPlayer.SpeedRatio.ToString();
-        }
-
         private void Click_SpeedRight(object sender, RoutedEventArgs args)
         {
             this.media.SpeedRight(MyMediaPlayer);
@@ -187,7 +180,8 @@ namespace MyWindowsMediaPlayer
 
         private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.Full_Screen(null, null);
+            if (!(MenuGrid.IsMouseOver || ButtonGrid.IsMouseOver || tree.IsMouseOver))
+                this.Full_Screen(null, null);
         }
 
         private void resize_Media_Player(bool fullscreen)
