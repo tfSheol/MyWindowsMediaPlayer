@@ -301,7 +301,19 @@ namespace MyWindowsMediaPlayer
 
         private void ShowPlaylist(object sender, RoutedEventArgs args)
         {
-            Playlist.ItemsSource = this.media.Get_PlayList().getList().ToArray();
+            String[] source;
+            String[] rawData;
+            String[] tmp;
+            int i = -1;
+
+            rawData = this.media.Get_PlayList().getList().ToArray();
+            source = new String[rawData.Count()];
+            while (++i < rawData.Count())
+            {
+                tmp = rawData[i].Split('\\');
+                source[i] = "" + (i + 1) + " - " + tmp.ElementAt(tmp.Count() - 1);
+            }
+            Playlist.ItemsSource = source;
         }
 
         private void ShowLib(object sender, RoutedEventArgs args)

@@ -123,14 +123,7 @@ namespace MyWindowsMediaPlayer
 
         public int findIndexOf(String str)
         {
-            int i = -1;
-
-            while (Musics.Count() > ++i)
-            {
-                if (str.Equals(Musics.ElementAt(i)))
-                    return (i);
-            }
-            return (-1);
+            return int.Parse(str.Split('-').ElementAt(0)) - 1;
         }
 
         public int countLeft()
