@@ -83,7 +83,7 @@ namespace MyWindowsMediaPlayer
 
         public String getNextMusic()
         {
-            if (CurrentMusic + 1 < Musics.Count() && CurrentMusic + 1 >= 0)
+            if (CurrentMusic < Musics.Count() && CurrentMusic >= 0)
             {
                 if (Start)
                     Start = false;
@@ -128,7 +128,9 @@ namespace MyWindowsMediaPlayer
 
         public int countLeft()
         {
-            return (Musics.Count() - (CurrentMusic + 1));
+            if (!Start)
+                return 0;
+            return (Musics.Count() - CurrentMusic);
         }
     }
 }

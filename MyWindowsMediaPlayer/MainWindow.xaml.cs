@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -318,14 +319,20 @@ namespace MyWindowsMediaPlayer
 
         private void ShowLib(object sender, RoutedEventArgs args)
         {
-            Console.WriteLine("lol");
             Musics.ItemsSource = this.media.Get_Musics();
             Photos.ItemsSource = this.media.Get_Photos();
         }
 
         private void Playlist_Read(object sender, RoutedEventArgs args)
         {
-            CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
+            if (this.media.Get_PlayList().getList().Count() != 0)
+                CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
+            else
+            {
+                Playlist_Add(sender, args);
+                if (this.media.Get_PlayList().getList().Count() != 0)
+                    CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
+            }
             if (this.media.Read_PlayList(MyMediaPlayer))
             {
                 if (this.media.Get_Played() == true)
@@ -374,6 +381,22 @@ namespace MyWindowsMediaPlayer
             name = this.media.Next_Click(this.MyMediaPlayer);
             if (name != null)
                 this.CurrentPlay.Content = name;
+        }
+
+        private void treeView_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] filePaths = (string[])(e.Data.GetData(DataFormats.FileDrop));
+                foreach (string fileLoc in filePaths)
+                    if (File.Exists(fileLoc))
+                        this.media.Get_PlayList().addAMusic(fileLoc);
+            }
+        }
+
+        ~MainWindow()
+        {
+            this.media.Save_PlayList(MyMediaPlayer);
         }
     }
 }

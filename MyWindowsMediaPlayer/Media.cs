@@ -204,6 +204,7 @@ namespace MyWindowsMediaPlayer
 
         public bool Read_PlayList(MediaElement mediaPlayer)
         {
+            Console.WriteLine("lol" + this.playlist.getList().Count());
             if (this.playlist.getList().Count() == 0)
                 return false;
             this.playlistReading = true;
@@ -235,7 +236,6 @@ namespace MyWindowsMediaPlayer
             if (playlist.countLeft() == 0)
                 playlist.setCurrentMusic(-1);
             this.setCurrentMedia(playlist.getNextMusic(), mediaPlayer);
-
         }
 
         public void Load_PlayList(MediaElement mediaPlayer)
