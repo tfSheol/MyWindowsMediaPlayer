@@ -91,8 +91,10 @@ namespace MyWindowsMediaPlayer
             {
                 if (Start)
                     Start = false;
-                else
+                else if (CurrentMusic < Musics.Count() - 1)
                     ++CurrentMusic;
+                else
+                    CurrentMusic = 0;
                 return (Musics.ElementAt(CurrentMusic));
             }
             return null;
