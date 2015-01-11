@@ -7,6 +7,7 @@ using System.Xml;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace MyWindowsMediaPlayer
 {
@@ -129,6 +130,10 @@ namespace MyWindowsMediaPlayer
 
         public int findIndexOf(String str)
         {
+            Regex myRegex = new Regex("^[0-9]+( - )*");
+
+            if (!myRegex.IsMatch(str))
+                return -1;
             return int.Parse(str.Split('-').ElementAt(0)) - 1;
         }
 

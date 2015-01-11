@@ -220,9 +220,41 @@ namespace MyWindowsMediaPlayer
 
         public bool Remove_PlaList(TreeView tree)
         {
-            if (tree.SelectedItem != null && - 1 != this.playlist.findIndexOf(tree.SelectedItem.ToString()))
+            if (tree.SelectedItem != null && -1 != this.playlist.findIndexOf(tree.SelectedItem.ToString()))
             {
                 this.playlist.delMusicFromPlaylist(playlist.findIndexOf(tree.SelectedItem.ToString()));
+                return true;
+            }
+            return false;
+        }
+
+        public bool Up_PlaList(TreeView tree)
+        {
+            String tmp;
+            int pos;
+
+            pos = this.playlist.findIndexOf(tree.SelectedItem.ToString());
+            if (tree.SelectedItem != null && pos > 0 &&  pos < this.playlist.getList().Count())
+            {
+                tmp = this.playlist.getList().ElementAt(pos);
+                this.playlist.getList().Insert(pos - 1, tmp);
+                this.playlist.getList().RemoveAt(pos + 1);
+                return true;
+            }
+            return false;
+        }
+
+        public bool Down_PlaList(TreeView tree)
+        {
+            String tmp;
+            int pos;
+
+            pos = this.playlist.findIndexOf(tree.SelectedItem.ToString());
+            if (tree.SelectedItem != null && pos > -1 && pos < this.playlist.getList().Count() - 1)
+            {
+                tmp = this.playlist.getList().ElementAt(pos);
+                this.playlist.getList().Insert(pos + 2, tmp);
+                this.playlist.getList().RemoveAt(pos);
                 return true;
             }
             return false;

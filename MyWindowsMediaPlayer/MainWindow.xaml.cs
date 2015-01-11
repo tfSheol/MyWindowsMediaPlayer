@@ -359,6 +359,18 @@ namespace MyWindowsMediaPlayer
             this.ShowPlaylist(sender, args);
         }
 
+        private void Playlist_Up(object sender, RoutedEventArgs args)
+        {
+            if (this.media.Up_PlaList(tree))
+                this.ShowPlaylist(sender, args);
+        }
+
+        private void Playlist_Down(object sender, RoutedEventArgs args)
+        {
+            if (this.media.Down_PlaList(tree))
+                this.ShowPlaylist(sender, args);
+        }
+
         private void Click_Prev(object sender, RoutedEventArgs args)
         {
             String name;
@@ -388,5 +400,7 @@ namespace MyWindowsMediaPlayer
             }
             this.ShowPlaylist(sender, e);
         }
+
+
     }
 }

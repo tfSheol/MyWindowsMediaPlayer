@@ -28,7 +28,8 @@
                     <MenuItem Header="Add" Click="Playlist_Add"/>
                     <MenuItem Header="Remove" Click="Playlist_Remove"/>
                     <MenuItem Header="Save" Click="Playlist_Save"/>
-                    <MenuItem Header="Load" Click="Playlist_Load"/>
+                    <MenuItem Header="Up track" Click="Playlist_Up"/>
+                    <MenuItem Header="Down track" Click="Playlist_Down"/>
                 </MenuItem>
             </Menu>
         </Grid>
@@ -64,7 +65,7 @@
             </Button>
             <Label Height="28" HorizontalAlignment="Left" Margin="246,40,0,0" Name="CurrentPlay" VerticalAlignment="Top" Width="141" />
         </Grid>
-        <TreeView Name="tree" HorizontalAlignment="Left" Opacity="0" Height="363" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave" AllowDrop="True"  DragEnter="Tree_Over" DragOver="Tree_Over" Drop="treeView_Drop">
+        <TreeView Name="tree" HorizontalAlignment="Left" Opacity="100" Height="363" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave" AllowDrop="True"  DragEnter="Tree_Over" DragOver="Tree_Over" Drop="treeView_Drop">
             <TreeViewItem Header="Playlist" IsExpanded="False" Name="Playlist" Expanded="ShowPlaylist"/>
             <TreeViewItem Header="Lib" IsExpanded="False"  Expanded="ShowLib">
                 <TreeViewItem Header="Musics" HorizontalAlignment="Left" Width="132" Name="Musics"/>
