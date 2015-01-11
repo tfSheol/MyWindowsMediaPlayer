@@ -13,7 +13,7 @@ using System.IO;
 
 namespace MyWindowsMediaPlayer
 {
-    class Media
+    public class Media
     {
         private MediaOpenFile openFile = new MediaOpenFile();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
@@ -51,9 +51,9 @@ namespace MyWindowsMediaPlayer
             this.dispatcherTimer.Start();
         }
 
-        public bool OpenFile(MediaElement mediaPlayer)
+        public bool OpenFile(MediaElement mediaPlayer, string pathOfLib = null)
         {
-            this.openFile.setPathFile();
+            this.openFile.setPathFile(pathOfLib);
             if (this.openFile.isPathFile())
             {
                 mediaPlayer.Source = new Uri(this.openFile.getPathFile());
@@ -173,8 +173,6 @@ namespace MyWindowsMediaPlayer
             if (this._played)
                 mediaPlayer.Play();
         }
-
-        /***************************************************/
 
         private bool setCurrentMedia(String path, MediaElement mediaPlayer)
         {

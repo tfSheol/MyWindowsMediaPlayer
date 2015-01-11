@@ -7,14 +7,19 @@ namespace MyWindowsMediaPlayer
     {
         private string _pathFile = "";
 
-        private string openOneFile()
+        private string openOneFile(string url)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.AddExtension = true;
-            ofd.DefaultExt = "*.*";
-            ofd.Filter = "Media(*.*)|*.*";
-            ofd.ShowDialog();
-            return ofd.FileName;
+            if (url == null)
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.AddExtension = true;
+                ofd.DefaultExt = "*.*";
+                ofd.Filter = "Media(*.*)|*.*";
+                ofd.ShowDialog();
+                return ofd.FileName;
+            }
+            else
+                return (url);
         }
 
         public bool isPathFile()
@@ -24,14 +29,10 @@ namespace MyWindowsMediaPlayer
             else
                 return false;
         }
-        public void setPathFile(String music)
-        {
-           _pathFile = music;
-        }
 
-        public void setPathFile()
+        public void setPathFile(string url = null)
         {
-            _pathFile = openOneFile();
+            _pathFile = openOneFile(url);
         }
 
         public string getPathFile()

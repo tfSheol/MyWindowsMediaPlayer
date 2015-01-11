@@ -56,7 +56,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Library.xaml.cs">
+      <DependentUpon>Library.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MediaOpenFile.cs" />
+    <Page Include="Library.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

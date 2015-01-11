@@ -14,14 +14,13 @@
             <Menu Height="20" Name="Menu" VerticalAlignment="Top">
                 <MenuItem Header="Media">
                     <MenuItem Header="Open file..." Click="Click_Open"/>
-                    <MenuItem Header="full screen" Click="Full_Screen"/>
+                    <MenuItem Header="Library" Click="Click_OpenLibrary"/>
+                    <MenuItem Header="Exit" Click="Click_Exit"/>
                 </MenuItem>
                 <MenuItem Header="Playback">
                     <MenuItem Header="Play" Click="Click_Play_Pause" Name="PlayMenuItem"/>
                     <MenuItem Header="Stop" Click="Click_Stop" />
-                </MenuItem>
-                <MenuItem Header="Tools">
-                    <MenuItem Name="MenuDebug" Header="Debug" Click="Checked_Debug" />
+                    <MenuItem Header="Full Screen" Click="Full_Screen"/>
                 </MenuItem>
                 <MenuItem Header="Playlist">
                     <MenuItem Header="Read" Click="Playlist_Read"/>
@@ -30,6 +29,9 @@
                     <MenuItem Header="Save" Click="Playlist_Save"/>
                     <MenuItem Header="Up track" Click="Playlist_Up"/>
                     <MenuItem Header="Down track" Click="Playlist_Down"/>
+                </MenuItem>
+                <MenuItem Header="Tools">
+                    <MenuItem Name="MenuDebug" Header="Debug" Click="Checked_Debug" />
                 </MenuItem>
             </Menu>
         </Grid>

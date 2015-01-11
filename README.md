@@ -17,10 +17,8 @@
 - Playlist
 
 ## TODO
-- Fix Forward x -1
-- Visualiser for audio
+- Library
 - Button loop play
 - Random play (playlist)
 - Drag and drop files (open modified)
-- Backward x(X)
 - General design

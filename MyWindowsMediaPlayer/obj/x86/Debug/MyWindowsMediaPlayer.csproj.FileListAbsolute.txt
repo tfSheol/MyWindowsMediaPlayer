@@ -43,3 +43,5 @@ C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\
 C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.Properties.Resources.resources
 C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.csproj.GenerateResource.Cache
 C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.csprojResolveAssemblyReference.cache
+D:\WORK\Git\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj\x86\Debug\Library.baml
+D:\WORK\Git\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj\x86\Debug\Library.g.cs

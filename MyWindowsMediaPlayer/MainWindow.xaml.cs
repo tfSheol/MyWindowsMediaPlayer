@@ -43,6 +43,18 @@ namespace MyWindowsMediaPlayer
             this.resize_Media_Player(false);
         }
 
+        private void Click_Exit(object sender, RoutedEventArgs args)
+        {
+            MyMediaPlayer.Close();
+            MyWindow.Close();
+        }
+
+        private void Click_OpenLibrary(object sender, RoutedEventArgs args)
+        {
+            Library lib = new Library(MyMediaPlayer, media);
+            lib.Show();
+        }
+
         private void Click_Open(object sender, RoutedEventArgs args)
         {
             this.media.Set_Reading_Playlist(false);
@@ -271,7 +283,6 @@ namespace MyWindowsMediaPlayer
         {
             this.media.Change_Time_Media(MyMediaPlayer, PositionSlider);
         }
-        /*------------------------------------------------------------------------------------*/
 
         private void Tree_Over(object sender, RoutedEventArgs args)
         {
