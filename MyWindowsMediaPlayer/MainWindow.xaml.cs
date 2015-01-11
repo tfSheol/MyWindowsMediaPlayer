@@ -273,6 +273,7 @@ namespace MyWindowsMediaPlayer
 
         private void Tree_Over(object sender, RoutedEventArgs args)
         {
+            this.ShowPlaylist(sender, args);
             tree.Opacity = 100;
             if (this.Height - 60 - ButtonGrid.Height >= 0)
                 tree.Height = this.Height - 60 - ButtonGrid.Height;
@@ -383,6 +384,7 @@ namespace MyWindowsMediaPlayer
                     if (File.Exists(fileLoc))
                         this.media.Get_PlayList().addAMusic(fileLoc);
             }
+            this.ShowPlaylist(sender, e);
         }
     }
 }

@@ -283,7 +283,8 @@ namespace MyWindowsMediaPlayer
                     this.playlist.setCurrentMusic(this.playlist.getCurrentMusic() + 1);
                 else
                     this.playlist.setCurrentMusic(-1);
-                if (this.setCurrentMedia(this.playlist.getList().ElementAt(this.playlist.getCurrentMusic()), mediaPlayer))
+                if (this.playlist.countLeft() > 0 &&
+                    this.setCurrentMedia(this.playlist.getList().ElementAt(this.playlist.getCurrentMusic()), mediaPlayer))
                 {
                     this.InitAll(mediaPlayer);
                     this._played = true;

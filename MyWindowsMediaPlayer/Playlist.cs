@@ -132,8 +132,7 @@ namespace MyWindowsMediaPlayer
 
         public int countLeft()
         {
-            if (!Start)
-                return 0;
+
             return (Musics.Count() - CurrentMusic);
         }
     }

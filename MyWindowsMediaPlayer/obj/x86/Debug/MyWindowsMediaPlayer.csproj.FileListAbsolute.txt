@@ -31,3 +31,15 @@ C:\Users\gael\Documents\SourceTree\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj
 C:\Users\gael\Documents\SourceTree\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.g.resources
 C:\Users\gael\Documents\SourceTree\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.Properties.Resources.resources
 C:\Users\gael\Documents\SourceTree\MyWindowsMediaPlayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.csproj.GenerateResource.Cache
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.exe
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.pdb
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\bin\Debug\MyWindowsMediaPlayer.exe
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\bin\Debug\MyWindowsMediaPlayer.pdb
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MainWindow.baml
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MainWindow.g.cs
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\App.g.cs
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer_MarkupCompile.cache
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.g.resources
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.Properties.Resources.resources
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.csproj.GenerateResource.Cache
+C:\Users\cerini_j\Desktop\git\winmediaplayer\MyWindowsMediaPlayer\obj\x86\Debug\MyWindowsMediaPlayer.csprojResolveAssemblyReference.cache
