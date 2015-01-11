@@ -78,8 +78,10 @@ namespace MyWindowsMediaPlayer
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Minutes.ToString() + ":"
                                     + MyMediaPlayer.NaturalDuration.TimeSpan.Seconds.ToString();
                 PositionSlider.Maximum = MyMediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                MyMediaPlayer.Width = MyMediaPlayer.NaturalVideoWidth - MyMediaPlayer.Width;
-                MyMediaPlayer.Height = MyMediaPlayer.NaturalVideoHeight - MyMediaPlayer.Height;
+                MyMediaPlayer.Width = (MyMediaPlayer.Height*MyMediaPlayer.NaturalVideoWidth)/
+                                            MyMediaPlayer.NaturalVideoHeight;
+                MyMediaPlayer.Height = (MyMediaPlayer.Width * MyMediaPlayer.NaturalVideoHeight) /
+                                            MyMediaPlayer.NaturalVideoWidth;
                 if (MyMediaPlayer.Width > 535 && MyMediaPlayer.Height > 95)
                 {
                     MyWindow.Width = MyMediaPlayer.Width + 16;
