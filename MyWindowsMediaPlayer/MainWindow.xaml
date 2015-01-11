@@ -30,49 +30,40 @@
                     <MenuItem Header="Up track" Click="Playlist_Up"/>
                     <MenuItem Header="Down track" Click="Playlist_Down"/>
                 </MenuItem>
-                <MenuItem Header="Tools">
-                    <MenuItem Name="MenuDebug" Header="Debug" Click="Checked_Debug" />
-                </MenuItem>
             </Menu>
         </Grid>
         <Grid Name="ButtonGrid" Background="White" Opacity="100" MouseEnter="ButtonGrid_OnMouseEnter" MouseLeave="ButtonGrid_OnMouseLeave"
               VerticalAlignment="Bottom" Height="75" Width="535">
-            <Slider Height="20" HorizontalAlignment="Left" Margin="246,23,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="150" Maximum="100" />
+            <Slider Height="20" HorizontalAlignment="Left" Margin="205,23,0,0" Name="Volume" ValueChanged="Slide_Volume" VerticalAlignment="Top" Width="191" Maximum="100" />
             <Slider Height="20" HorizontalAlignment="Left" Margin="67,4,0,0" Name="PositionSlider" ValueChanged="PositionSlider_OnValueChanged" VerticalAlignment="Top" Width="448" />
             <CheckBox Content="Mute" Height="16" HorizontalAlignment="Left" Margin="419,24,0,0" Name="MuteCheckBox" VerticalAlignment="Top" Click="Mute_CheckBox_Click" />
-            <CheckBox Content="hide" Height="16" HorizontalAlignment="Left" Margin="419,50,0,0" Name="HideAll" VerticalAlignment="Top" Click="HideAll_OnClick" />
-            <Label Content="0:00:00" Height="20" HorizontalAlignment="Left" Name="TimeMedia" VerticalAlignment="Top" Width="35" FontSize="10" Padding="0" Margin="12,4,0,0" />
+            <CheckBox Content="Hide" Height="16" HorizontalAlignment="Left" Margin="419,50,0,0" Name="HideAll" VerticalAlignment="Top" Click="HideAll_OnClick" Checked="HideAll_Checked" />
+            <Label Content="00:00:00" Height="20" HorizontalAlignment="Left" Name="TimeMedia" VerticalAlignment="Top" Width="36" FontSize="10" Padding="0" Margin="12,4,0,0" />
 
             <Button Height="50" HorizontalAlignment="Left" Margin="4,22,0,0" Name="Play" Click="Click_Play_Pause" VerticalAlignment="Top" Width="50" >
                 <Image Source="Ressource/play.jpg" />
             </Button>
 
-            <Button Height="34" HorizontalAlignment="Left" Margin="150,34,0,0" Name="Stop" Click="Click_Stop" VerticalAlignment="Top" Width="40" >
+            <Button Height="30" HorizontalAlignment="Left" Margin="132,32,0,0" Name="Stop" Click="Click_Stop" VerticalAlignment="Top" Width="32" >
                 <Image Source="Ressource/stop.png" />
             </Button>
-            <Button Height="30" HorizontalAlignment="Left" Margin="65,36,0,0" Name="SpeedRight" Click="Click_SpeedRight" VerticalAlignment="Top" Width="30" >
-                <Image Source="Ressource/avance_rapide.png" />
-            </Button>
+            <Button Height="30" HorizontalAlignment="Left" Margin="61,32,0,0" Name="SpeedRight" Click="Click_SpeedRight" VerticalAlignment="Top" Width="30" ></Button>
 
-            <Button Height="25" HorizontalAlignment="Left" Margin="194,43,0,0" Name="NextButton" Click="Click_Next" VerticalAlignment="Top" Width="25" >
+            <Button Height="30" HorizontalAlignment="Left" Margin="170,32,0,0" Name="NextButton" Click="Click_Next" VerticalAlignment="Top" Width="29" >
                 <Image Source="Ressource/suivant.png" />
             </Button>
 
-            <Button Height="25" HorizontalAlignment="Left" Margin="121,44,0,0" Name="PrevButton" Click="Click_Prev" VerticalAlignment="Top" Width="25" >
-                <Image Source="Ressource/precedent.png" />
-            </Button>
+            <Button Height="30" HorizontalAlignment="Left" Margin="97,32,0,0" Name="PrevButton" Click="Click_Prev" VerticalAlignment="Top" Width="29" ></Button>
 
             <Button Height="23" HorizontalAlignment="Left" Margin="491,43,0,0" Name="FullScreenButton" VerticalAlignment="Top" Width="29" Click="Full_Screen">
                 <Image Source="Ressource/fullScreen.png" />
             </Button>
-            <Label Height="28" HorizontalAlignment="Left" Margin="246,40,0,0" Name="CurrentPlay" VerticalAlignment="Top" Width="141" />
+            <Label Height="28" HorizontalAlignment="Left" Margin="205,40,0,0" Name="CurrentPlay" VerticalAlignment="Top" Width="191" />
+            <Image Source="Ressource/avance_rapide.png" Margin="63,34,446,15" />
+            <Image Source="Ressource/precedent.png" Margin="99,34,411,15" />
         </Grid>
         <TreeView Name="tree" HorizontalAlignment="Left" Opacity="100" Height="363" Margin="379,20,0,0" VerticalAlignment="Top" Width="155" MouseEnter="Tree_Over" MouseLeave="Tree_Leave" AllowDrop="True"  DragEnter="Tree_Over" DragOver="Tree_Over" Drop="treeView_Drop">
             <TreeViewItem Header="Playlist" IsExpanded="False" Name="Playlist" Expanded="ShowPlaylist"/>
-            <TreeViewItem Header="Lib" IsExpanded="False"  Expanded="ShowLib">
-                <TreeViewItem Header="Musics" HorizontalAlignment="Left" Width="132" Name="Musics"/>
-                <TreeViewItem Header="Photos" HorizontalAlignment="Left" Width="132" Name="Photos"/>
-            </TreeViewItem>
         </TreeView>
         <TextBox Height="22" HorizontalAlignment="Left" Margin="12,37,0,0" Name="Debug" Visibility="Hidden" VerticalAlignment="Top" Width="353" />
     </Grid>

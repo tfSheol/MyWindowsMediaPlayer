@@ -231,6 +231,8 @@ namespace MyWindowsMediaPlayer
             String tmp;
             int pos;
 
+            if (tree.SelectedItem == null)
+                return false;
             pos = this.playlist.findIndexOf(tree.SelectedItem.ToString());
             if (tree.SelectedItem != null && pos > 0 &&  pos < this.playlist.getList().Count())
             {
@@ -247,6 +249,8 @@ namespace MyWindowsMediaPlayer
             String tmp;
             int pos;
 
+            if (tree.SelectedItem == null)
+                return false;
             pos = this.playlist.findIndexOf(tree.SelectedItem.ToString());
             if (tree.SelectedItem != null && pos > -1 && pos < this.playlist.getList().Count() - 1)
             {

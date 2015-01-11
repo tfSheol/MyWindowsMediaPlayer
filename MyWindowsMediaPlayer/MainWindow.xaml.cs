@@ -109,7 +109,10 @@ namespace MyWindowsMediaPlayer
             PlayMenuItem.Header = "Pause";
             this.media.Update_Time(MyMediaPlayer);
             if (this.media.Get_Reading_Playlist())
-                CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
+            {
+                FileInfo info = new FileInfo(this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic()));
+                CurrentPlay.Content = info.Name;
+            }
         }
 
         private void Click_Stop(object sender, RoutedEventArgs args)
@@ -139,7 +142,6 @@ namespace MyWindowsMediaPlayer
 
         private void Checked_Debug(object sender, RoutedEventArgs args)
         {
-            MenuDebug.IsChecked = !MenuDebug.IsChecked;
             if (Debug.Visibility == Visibility.Hidden)
                 Debug.Visibility = Visibility.Visible;
             else
@@ -282,6 +284,7 @@ namespace MyWindowsMediaPlayer
         private void PositionSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             this.media.Change_Time_Media(MyMediaPlayer, PositionSlider);
+            TimeMedia.Content = MyMediaPlayer.Position;
         }
 
         private void Tree_Over(object sender, RoutedEventArgs args)
@@ -322,21 +325,21 @@ namespace MyWindowsMediaPlayer
             Playlist.ItemsSource = source;
         }
 
-        private void ShowLib(object sender, RoutedEventArgs args)
-        {
-            Musics.ItemsSource = this.media.Get_Musics();
-            Photos.ItemsSource = this.media.Get_Photos();
-        }
-
         private void Playlist_Read(object sender, RoutedEventArgs args)
         {
             if (this.media.Get_PlayList().getList().Count() != 0)
-                CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
+            {
+                FileInfo info = new FileInfo(this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic()));
+                CurrentPlay.Content = info.Name;
+            }
             else
             {
                 Playlist_Add(sender, args);
                 if (this.media.Get_PlayList().getList().Count() != 0)
-                    CurrentPlay.Content = this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic());
+                {
+                    FileInfo info = new FileInfo(this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic()));
+                    CurrentPlay.Content = info.Name;
+                }
             }
             if (this.media.Read_PlayList(MyMediaPlayer))
             {
@@ -388,7 +391,10 @@ namespace MyWindowsMediaPlayer
 
             name = this.media.Prev_Click(this.MyMediaPlayer);
             if (name != null)
-                this.CurrentPlay.Content = name;
+            {
+                FileInfo info = new FileInfo(this.media.Get_PlayList().getList().ElementAt(this.media.Get_PlayList().getCurrentMusic()));
+                CurrentPlay.Content = info.Name;
+            }
         }
 
         private void Click_Next(object sender, RoutedEventArgs args)
@@ -410,6 +416,11 @@ namespace MyWindowsMediaPlayer
                         this.media.Get_PlayList().addAMusic(fileLoc);
             }
             this.ShowPlaylist(sender, e);
+        }
+
+        private void HideAll_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
 
 
