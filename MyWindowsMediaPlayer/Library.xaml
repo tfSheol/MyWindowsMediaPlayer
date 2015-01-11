@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Library" Height="500" Width="900">
     <Grid>
-        <ListView Height="461" HorizontalAlignment="Left" Name="libList" VerticalAlignment="Top" Width="890" SelectionChanged="Select_Element" >
+        <ListView Height="440" HorizontalAlignment="Left" Name="libList" VerticalAlignment="Top" Width="890" SelectionChanged="Select_Element" Margin="0,21,0,0">
             <ListView.View>
                 <GridView AllowsColumnReorder="false">
                     <GridViewColumn DisplayMemberBinding=
@@ -19,5 +19,8 @@
 
             </ListView.View>
         </ListView>
+        <Button Content="Musics" Height="23" HorizontalAlignment="Left" Name="musics" VerticalAlignment="Top" Width="75" Click="Click_Musics" />
+        <Button Content="Movies" Height="23" HorizontalAlignment="Left" Margin="81,0,0,0" Name="movies" VerticalAlignment="Top" Width="75" Click="Click_Movies" />
+        <Button Content="Pictures" Height="23" HorizontalAlignment="Left" Margin="162,0,0,0" Name="pictures" VerticalAlignment="Top" Width="75" Click="Click_Pictures" />
     </Grid>
 </Window>

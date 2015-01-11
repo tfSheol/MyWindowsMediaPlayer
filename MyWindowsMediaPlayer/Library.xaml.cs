@@ -38,11 +38,11 @@ namespace MyWindowsMediaPlayer
             loadAllData();
         }
 
-        private void loadAllData()
+        private void loadAllData(string option = "Music")
         {
             try
             {
-                string[] mediaFiles = Directory.GetFiles(@Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Music", "*.mp3", SearchOption.AllDirectories);
+                string[] mediaFiles = Directory.GetFiles(@Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\" + option, "*.*", SearchOption.AllDirectories);
                 _itemMediaLib = mediaFiles;
                 foreach (string name in mediaFiles)
                 {
@@ -58,12 +58,40 @@ namespace MyWindowsMediaPlayer
 
         private string getItemPath(int index)
         {
-            return _itemMediaLib[index];
+            try
+            {
+                return _itemMediaLib[index];
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
         }
 
         private void Select_Element(object sender, SelectionChangedEventArgs args)
         { 
             _libMedia.OpenFile(_libMediaPlayer, getItemPath(libList.SelectedIndex));
+        }
+
+        private void Click_Musics(object sender, RoutedEventArgs args)
+        {
+            libList.Items.Clear();
+            _itemMediaLib = null;
+            loadAllData("Music");
+        }
+
+        private void Click_Movies(object sender, RoutedEventArgs args)
+        {
+            libList.Items.Clear();
+            _itemMediaLib = null;
+            loadAllData("Videos");
+        }
+
+        private void Click_Pictures(object sender, RoutedEventArgs args)
+        {
+            libList.Items.Clear();
+            _itemMediaLib = null;
+            loadAllData("Pictures");
         }
     }
 }
